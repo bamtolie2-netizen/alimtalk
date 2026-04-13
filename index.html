@@ -672,9 +672,8 @@ tr:hover .td-act{opacity:1}
 <input type="file" id="fileInput" multiple style="display:none" onchange="onFiles(this)"/>
 
 <script>
-const SUPABASE_URL = 'https://mathhyygiyvczzcemepm.supabase.co'
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdGhoeXlnaXl2Y3p6Y2VtZXBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3OTY1MDEsImV4cCI6MjA5MTM3MjUwMX0.DdJkLOtczQpabJlZOScXV3OaeWk6Moy1oOMpoTKgpk4
-'
+const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co'
+const SUPABASE_KEY = 'YOUR_ANON_KEY'
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
 
 let currentUser=null, allUsers=[]
@@ -919,7 +918,7 @@ function renderSalesDashboard(){
     return`<div class="team-row"><div class="team-av">${u.name.slice(0,2)}</div><div class="team-info"><div class="team-name">${e(u.name)}</div><div class="team-stat">리드 ${leads.filter(l=>l.assignee_id===u.id).length}건 | 활동 ${activities.filter(a=>a.user_id===u.id&&(a.activity_at||'').startsWith(ym)).length}건</div>${tg?`<div class="prog-wrap"><div class="prog-bar" style="width:${Math.min(r,100)}%"></div></div>`:''}</div><div class="team-nums"><div><div class="team-num-val">${ac?ac.toLocaleString()+'만':'-'}</div><div class="team-num-lbl">실적</div></div><div><div class="team-num-val" style="color:${r>=100?'var(--green)':r>=70?'var(--amber)':'var(--text)'}">${tg?r+'%':'-'}</div><div class="team-num-lbl">달성률</div></div></div></div>`
   }).join('')||'<div style="font-size:12px;color:var(--text3)">팀원 없음</div>'
   document.getElementById('actFeed').innerHTML=activities.slice(0,6).map(a=>{const u=allUsers.find(x=>x.id===a.user_id),l=leads.find(x=>x.id===a.lead_id),dt=a.activity_at?new Date(a.activity_at).toLocaleDateString('ko',{month:'short',day:'numeric'}):''
-    return`<div class="act-item"><div class="act-icon" style="background:${ACT_BG[a.type]||'#f0f0f0'}">${ACT_ICON[a.type]||'O'}</div><div class="act-body"><div class="act-title">${e(a.title)}${l?` · ${e(l.company)}`:''}</div><div class="act-meta">${u?e(u.name):''} ${dt}</div></div></div>`
+    return`<div class="act-item"><div class="act-icon" style="background:${ACT_BG[a.type]||'#f0f0f0'}">${ACT_ICON[a.type]||'O'}</div><div class="act-body"><div class="act-title">${e(a.title)}${l?` \u00B7 ${e(l.company)}`:''}</div><div class="act-meta">${u?e(u.name):''} ${dt}</div></div></div>`
   }).join('')||'<div style="font-size:12px;color:var(--text3)">활동 기록이 없어요</div>'
   renderLeadTable()
 }
