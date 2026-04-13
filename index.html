@@ -208,6 +208,22 @@ tr:hover .td-act{opacity:1}
 .dash-lead-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--bg2);border-radius:var(--r);font-size:12px}
 .response-bar{display:flex;height:8px;border-radius:20px;overflow:hidden;margin-top:6px;gap:1px}
 .response-seg{height:100%;transition:width .3s}
+.tdl-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:var(--r);border:0.5px solid var(--bd);margin-bottom:6px;background:var(--bg)}
+.tdl-item.done{opacity:.5}
+.tdl-item.done .tdl-title{text-decoration:line-through;color:var(--text3)}
+.tdl-cb2{width:16px;height:16px;accent-color:var(--green);cursor:pointer;flex-shrink:0;margin-top:1px}
+.tdl-body{flex:1;min-width:0}
+.tdl-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.tdl-meta{font-size:11px;color:var(--text3)}
+.tdl-actions{display:flex;gap:4px;flex-shrink:0}
+.rnr-card{border:0.5px solid var(--bd);border-radius:var(--r);padding:14px;margin-bottom:8px}
+.rnr-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.rnr-av{width:34px;height:34px;border-radius:50%;background:#E6F1FB;color:#0C447C;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.rnr-name{font-size:13px;font-weight:600}
+.rnr-role{font-size:11px;color:var(--blue);font-weight:500;margin-top:2px}
+.rnr-desc{font-size:12px;color:var(--text2);line-height:1.7;white-space:pre-wrap}
+.rnr-empty{font-size:12px;color:var(--text3);font-style:italic}
+.carry-badge{background:var(--amber-bg);color:var(--amber);font-size:10px;padding:1px 6px;border-radius:20px;margin-left:5px;font-weight:600}
 @media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr}.pipeline{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
@@ -236,6 +252,8 @@ tr:hover .td-act{opacity:1}
     <div class="nav-tab"     id="nav-sales"    onclick="showPage('sales')">영업관리</div>
     <div class="nav-tab"     id="nav-outbound" onclick="showPage('outbound')">아웃바운드</div>
     <div class="nav-tab"     id="nav-improve"  onclick="showPage('improve')">고객개선</div>
+    <div class="nav-tab"     id="nav-tdl"      onclick="showPage('tdl')">TDL</div>
+    <div class="nav-tab"     id="nav-rnr"      onclick="showPage('rnr')">R&amp;R</div>
     <div class="nav-tab"     id="nav-mail"     onclick="showPage('mail')">메일초안</div>
     <div class="nav-tab"     id="nav-settings" onclick="showPage('settings')">설정</div>
     <div class="nav-right">
@@ -437,6 +455,46 @@ tr:hover .td-act{opacity:1}
     </div>
   </div>
 
+  <!-- TDL -->
+  <div class="page" id="page-tdl">
+    <div class="pscroll">
+      <div class="card">
+        <div class="sec-hd">
+          <div>
+            <span class="sec-title">오늘의 할 일</span>
+            <span style="font-size:11px;color:var(--text3);margin-left:8px" id="tdlDateLabel"></span>
+          </div>
+          <div style="display:flex;gap:7px;align-items:center">
+            <input type="date" id="tdlDate" style="font-size:12px;padding:4px 8px;border-radius:var(--r);border:0.5px solid var(--bd2);background:var(--bg2);color:var(--text);outline:none" onchange="renderTdl()"/>
+            <button class="btn btn-sm btn-primary" onclick="openTdlModal()">+ 추가</button>
+          </div>
+        </div>
+        <!-- 미완료 이월 안내 -->
+        <div id="carryOverBanner" style="display:none;background:var(--amber-bg);border-radius:var(--r);padding:8px 12px;margin-bottom:12px;font-size:12px;color:var(--amber);display:flex;align-items:center;justify-content:space-between">
+          <span id="carryOverMsg"></span>
+          <button class="btn btn-xs" onclick="doCarryOver()" style="color:var(--amber);border-color:var(--amber)">이월 처리</button>
+        </div>
+        <!-- 진행률 -->
+        <div id="tdlProgress" style="margin-bottom:12px"></div>
+        <!-- 목록 -->
+        <div id="tdlList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- R&R -->
+  <div class="page" id="page-rnr">
+    <div class="pscroll">
+      <div class="card">
+        <div class="sec-hd">
+          <span class="sec-title">팀원별 R&amp;R</span>
+          <button class="btn btn-sm btn-primary" onclick="openRnrEdit()">내 R&amp;R 수정</button>
+        </div>
+        <div id="rnrList"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- MAIL -->
   <div class="page" id="page-mail">
     <div class="mail-layout">
@@ -568,6 +626,24 @@ tr:hover .td-act{opacity:1}
   <div class="mbtns"><button class="btn" onclick="closeModal('modalImprove')">취소</button><button class="btn btn-primary" onclick="saveImprove()">저장</button></div>
 </div></div>
 
+<div class="mbg" id="modalTdl"><div class="modal">
+  <h3 id="tdlModalTitle">할 일 추가</h3>
+  <div class="fl"><label>할 일 *</label><input id="tdlTitle" placeholder="오늘 할 일을 입력하세요"/></div>
+  <div class="r2">
+    <div class="fl"><label>우선순위</label><select id="tdlPriority"><option>긴급</option><option>높음</option><option selected>보통</option><option>낮음</option></select></div>
+    <div class="fl"><label>날짜</label><input id="tdlItemDate" type="date"/></div>
+  </div>
+  <div class="fl"><label>메모</label><textarea id="tdlMemo" style="min-height:50px"></textarea></div>
+  <div class="mbtns"><button class="btn" onclick="closeModal('modalTdl')">취소</button><button class="btn btn-primary" onclick="saveTdl()">저장</button></div>
+</div></div>
+
+<div class="mbg" id="modalRnr"><div class="modal">
+  <h3>내 R&amp;R 수정</h3>
+  <div class="fl"><label>직책 / 역할명</label><input id="rnrTitle" placeholder="예) 마케팅 팀장, 콘텐츠 담당"/></div>
+  <div class="fl"><label>담당 업무 상세</label><textarea id="rnrDesc" style="min-height:120px" placeholder="예) SNS 채널 운영, 캠페인 기획, 주간 리포트 작성 등"></textarea></div>
+  <div class="mbtns"><button class="btn" onclick="closeModal('modalRnr')">취소</button><button class="btn btn-primary" onclick="saveRnr()">저장</button></div>
+</div></div>
+
 <div class="mbg" id="modalNew"><div class="modal">
   <h3>새 템플릿</h3>
   <div class="fl"><label>이름 *</label><input id="nName"/></div>
@@ -596,14 +672,15 @@ tr:hover .td-act{opacity:1}
 <input type="file" id="fileInput" multiple style="display:none" onchange="onFiles(this)"/>
 
 <script>
-const SUPABASE_URL = 'https://mathhyygiyvczzcemepm.supabase.co'
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdGhoeXlnaXl2Y3p6Y2VtZXBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3OTY1MDEsImV4cCI6MjA5MTM3MjUwMX0.DdJkLOtczQpabJlZOScXV3OaeWk6Moy1oOMpoTKgpk4
-'
+const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co'
+const SUPABASE_KEY = 'YOUR_ANON_KEY'
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
 
 let currentUser=null, allUsers=[]
 let tpls=[], cats=[], leads=[], activities=[], targets=[], msgLogs=[]
 let campaigns=[], outbounds=[], improvements=[]
+let todos=[], rnrData=[]
+let editingTdlId=null
 let sel=null, tplMode='edit', openCats={}, dragSrc=null, vals={}, files=[]
 let selectMode=false, selectedIds=new Set(), ctxTargetId=null, moveTargetIds=[]
 let editingLeadId=null, editingCampId=null, editingObId=null, editingImpId=null
@@ -653,12 +730,12 @@ async function selectUser(id) {
   document.getElementById('userAv').textContent = user.name.slice(0,2)
   document.getElementById('userName').textContent = user.name
   document.getElementById('historyUser').innerHTML = '<option value="">전체 팀원</option>' + allUsers.map(u=>`<option value="${u.id}">${e(u.name)}</option>`).join('')
-  await Promise.all([loadSalesData(), loadMsgLogs(), loadTemplates(), loadOutbound(), loadImprovements()])
+  await Promise.all([loadSalesData(), loadMsgLogs(), loadTemplates(), loadOutbound(), loadImprovements(), loadTodos(), loadRnr()])
   renderDashboard(); renderCatTags(); renderMemberManage()
 }
 
 function switchUser() {
-  currentUser=null; tpls=[];cats=[];leads=[];activities=[];targets=[];msgLogs=[];campaigns=[];outbounds=[];improvements=[]
+  currentUser=null; tpls=[];cats=[];leads=[];activities=[];targets=[];msgLogs=[];campaigns=[];outbounds=[];improvements=[];todos=[];rnrData=[]
   sel=null;vals={};files=[];selectMode=false;selectedIds=new Set()
   if(dashChart1){dashChart1.destroy();dashChart1=null}
   if(dashChart2){dashChart2.destroy();dashChart2=null}
@@ -668,13 +745,15 @@ function switchUser() {
 }
 
 function showPage(p) {
-  ['dash','msg','sales','outbound','improve','mail','settings'].forEach(id => {
+  ['dash','msg','sales','outbound','improve','tdl','rnr','mail','settings'].forEach(id => {
     document.getElementById('page-'+id).classList.toggle('on', id===p)
     document.getElementById('nav-'+id).classList.toggle('on', id===p)
   })
   if (p==='dash') renderDashboard()
   if (p==='outbound') { renderCampTable(); renderOutboundList() }
   if (p==='improve') renderImproveTable()
+  if (p==='tdl') renderTdl()
+  if (p==='rnr') renderRnr()
   if (p==='settings') { renderCatTags(); renderMemberManage() }
 }
 
@@ -1077,6 +1156,169 @@ function fmt(b){if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'K
 function copyAll(){const t=tpls.find(x=>x.id===sel);if(!t)return;let s=t.subject,b=t.body;t.vars.forEach(v=>{const rx=new RegExp('\\{'+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\}','g');s=s.replace(rx,vals[v]||'{'+v+'}');b=b.replace(rx,vals[v]||'{'+v+'}')});if(files.length)b+='\n\n첨부파일: '+files.map(f=>f.name).join(', ');navigator.clipboard.writeText('제목: '+s+'\n\n'+b).then(()=>{const btn=document.getElementById('btnCopy');btn.textContent='복사 완료!';btn.style.color='var(--green)';setTimeout(()=>{btn.textContent='복사하기';btn.style.color=''},2000)})}
 function openNewTpl(){document.getElementById('nName').value='';const s=document.getElementById('nCat');s.innerHTML='<option value="">없음</option>'+cats.map(c=>`<option value="${e(c)}">${e(c)}</option>`).join('');openModal('modalNew')}
 async function confirmNew(){const name=document.getElementById('nName').value.trim();if(!name){alert('이름을 입력하세요');return}const cat=document.getElementById('nCat').value;try{const cr=await dbCreate({name,category:cat,subject:'['+name+'] {주제}',vars:['수신자','발신자','주제'],body:'안녕하세요, {수신자}님.\n\n{발신자}입니다.\n\n{주제} 관련하여 연락드립니다.\n\n감사합니다.\n{발신자} 드림',sort_order:tpls.length});tpls.push(cr);closeModal('modalNew');renderSb();selT(cr.id)}catch(err){alert('생성 실패: '+err.message)}}
+
+// -- TDL --
+async function loadTodos(){
+  const{data}=await sb.from('todos').select('*').eq('user_id',currentUser.id).order('todo_date').order('created_at')
+  todos=data||[]
+}
+
+function renderTdl(){
+  if(!currentUser)return
+  const today=new Date().toISOString().slice(0,10)
+  const tdlDate=document.getElementById('tdlDate')
+  if(!tdlDate.value)tdlDate.value=today
+  const d=tdlDate.value
+  document.getElementById('tdlDateLabel').textContent=d===today?'(오늘)':d<today?'(이전)':'(예정)'
+
+  // 이월 체크: 어제 미완료 항목
+  const yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10)
+  const pendingYest=todos.filter(t=>t.todo_date===yesterday&&t.status==='미완료'&&!t.carried)
+  const banner=document.getElementById('carryOverBanner')
+  if(pendingYest.length>0&&d===today){
+    banner.style.display='flex'
+    document.getElementById('carryOverMsg').textContent='어제 미완료 '+pendingYest.length+'개를 오늘로 이월할까요?'
+  }else{banner.style.display='none'}
+
+  // 진행률
+  const dayTodos=todos.filter(t=>t.todo_date===d)
+  const done=dayTodos.filter(t=>t.status==='완료').length
+  const total=dayTodos.length
+  const pct=total>0?Math.round(done/total*100):0
+  document.getElementById('tdlProgress').innerHTML=total>0?`
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <div style="flex:1;background:var(--bg3);border-radius:20px;height:8px;overflow:hidden">
+        <div style="width:${pct}%;height:100%;background:${pct===100?'var(--green)':'var(--blue)'};border-radius:20px;transition:width .4s"></div>
+      </div>
+      <span style="font-size:12px;font-weight:600;color:${pct===100?'var(--green)':'var(--text)'}">${done}/${total} (${pct}%)</span>
+    </div>`:''
+
+  // 목록: 우선순위 순 정렬
+  const pOrder={긴급:0,높음:1,보통:2,낮음:3}
+  const sorted=[...dayTodos].sort((a,b)=>(pOrder[a.priority]||2)-(pOrder[b.priority]||2))
+  const list=document.getElementById('tdlList')
+  if(!sorted.length){list.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px 0;text-align:center">할 일이 없어요. + 추가로 등록하세요</div>';return}
+  list.innerHTML=sorted.map(t=>`
+    <div class="tdl-item ${t.status==='완료'?'done':''}">
+      <input type="checkbox" class="tdl-cb2" ${t.status==='완료'?'checked':''} onchange="toggleTdl('${t.id}',this.checked)"/>
+      <div class="tdl-body">
+        <div class="tdl-title">${e(t.title)}${t.carried?'<span class="carry-badge">이월</span>':''}</div>
+        <div class="tdl-meta">
+          <span class="badge ${P_COLOR[t.priority]||'b-gray'}">${t.priority}</span>
+          ${t.memo?`<span style="margin-left:6px">${e(t.memo)}</span>`:''}
+        </div>
+      </div>
+      <div class="tdl-actions">
+        <button class="btn btn-xs" onclick="openTdlModal('${t.id}')">수정</button>
+        <button class="btn btn-xs btn-danger" onclick="deleteTdl('${t.id}')">삭제</button>
+      </div>
+    </div>`).join('')
+}
+
+async function toggleTdl(id,checked){
+  const t=todos.find(x=>x.id===id);if(!t)return
+  t.status=checked?'완료':'미완료'
+  await sb.from('todos').update({status:t.status}).eq('id',id)
+  renderTdl()
+}
+
+async function doCarryOver(){
+  const yesterday=new Date(Date.now()-86400000).toISOString().slice(0,10)
+  const today=new Date().toISOString().slice(0,10)
+  const pending=todos.filter(t=>t.todo_date===yesterday&&t.status==='미완료'&&!t.carried)
+  for(const t of pending){
+    const{data}=await sb.from('todos').insert({user_id:currentUser.id,title:t.title,memo:t.memo,priority:t.priority,status:'미완료',todo_date:today,carried:true}).select().single()
+    if(data)todos.push(data)
+    await sb.from('todos').update({carried:true}).eq('id',t.id)
+    t.carried=true
+  }
+  document.getElementById('carryOverBanner').style.display='none'
+  renderTdl()
+}
+
+function openTdlModal(id){
+  editingTdlId=id||null
+  document.getElementById('tdlModalTitle').textContent=id?'할 일 수정':'할 일 추가'
+  const today=new Date().toISOString().slice(0,10)
+  const d=document.getElementById('tdlDate').value||today
+  if(id){
+    const t=todos.find(x=>x.id===id);if(!t)return
+    document.getElementById('tdlTitle').value=t.title||''
+    document.getElementById('tdlPriority').value=t.priority||'보통'
+    document.getElementById('tdlItemDate').value=t.todo_date||d
+    document.getElementById('tdlMemo').value=t.memo||''
+  }else{
+    document.getElementById('tdlTitle').value=''
+    document.getElementById('tdlPriority').value='보통'
+    document.getElementById('tdlItemDate').value=d
+    document.getElementById('tdlMemo').value=''
+  }
+  openModal('modalTdl')
+}
+
+async function saveTdl(){
+  const title=document.getElementById('tdlTitle').value.trim();if(!title){alert('할 일을 입력하세요');return}
+  const p={title,priority:document.getElementById('tdlPriority').value,todo_date:document.getElementById('tdlItemDate').value||new Date().toISOString().slice(0,10),memo:document.getElementById('tdlMemo').value.trim(),user_id:currentUser.id}
+  if(editingTdlId){
+    await sb.from('todos').update(p).eq('id',editingTdlId)
+    const i=todos.findIndex(t=>t.id===editingTdlId);if(i>=0)todos[i]={...todos[i],...p}
+  }else{
+    const{data}=await sb.from('todos').insert({...p,status:'미완료',carried:false}).select().single()
+    if(data)todos.push(data)
+  }
+  closeModal('modalTdl');renderTdl()
+}
+
+async function deleteTdl(id){
+  if(!confirm('삭제할까요?'))return
+  await sb.from('todos').delete().eq('id',id)
+  todos=todos.filter(t=>t.id!==id);renderTdl()
+}
+
+// -- RNR --
+async function loadRnr(){
+  const{data}=await sb.from('rnr').select('*')
+  rnrData=data||[]
+}
+
+function renderRnr(){
+  const el=document.getElementById('rnrList');if(!el)return
+  el.innerHTML=allUsers.map(u=>{
+    const r=rnrData.find(x=>x.user_id===u.id)
+    const isMe=u.id===currentUser.id
+    return`<div class="rnr-card">
+      <div class="rnr-header">
+        <div class="rnr-av">${u.name.slice(0,2)}</div>
+        <div>
+          <div class="rnr-name">${e(u.name)}${isMe?'<span style="font-size:10px;color:var(--blue);margin-left:6px">(나)</span>':''}</div>
+          ${r?.role_title?`<div class="rnr-role">${e(r.role_title)}</div>`:''}
+        </div>
+      </div>
+      ${r?.description?`<div class="rnr-desc">${e(r.description)}</div>`:'<div class="rnr-empty">아직 R&R이 등록되지 않았어요</div>'}
+    </div>`
+  }).join('')||'<div style="font-size:12px;color:var(--text3)">팀원이 없어요</div>'
+}
+
+function openRnrEdit(){
+  const r=rnrData.find(x=>x.user_id===currentUser.id)
+  document.getElementById('rnrTitle').value=r?.role_title||''
+  document.getElementById('rnrDesc').value=r?.description||''
+  openModal('modalRnr')
+}
+
+async function saveRnr(){
+  const role_title=document.getElementById('rnrTitle').value.trim()
+  const description=document.getElementById('rnrDesc').value.trim()
+  const existing=rnrData.find(x=>x.user_id===currentUser.id)
+  if(existing){
+    await sb.from('rnr').update({role_title,description,updated_at:new Date().toISOString()}).eq('id',existing.id)
+    existing.role_title=role_title;existing.description=description
+  }else{
+    const{data}=await sb.from('rnr').insert({user_id:currentUser.id,role_title,description}).select().single()
+    if(data)rnrData.push(data)
+  }
+  closeModal('modalRnr');renderRnr()
+}
 
 // -- SETTINGS --
 function renderCatTags(){const el=document.getElementById('catTagList');if(!el)return;el.innerHTML=cats.length?cats.map((c,i)=>`<span class="cat-tag">${e(c)}<span class="cx" onclick="removeCategory(${i})">x</span></span>`).join(''):'<span style="font-size:12px;color:var(--text3)">카테고리가 없어요</span>'}
