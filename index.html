@@ -606,9 +606,8 @@ tr:hover .td-act{opacity:1}
 
 <script>
 // - CONFIG -
-const SUPABASE_URL = 'https://mathhyygiyvczzcemepm.supabase.co'
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1hdGhoeXlnaXl2Y3p6Y2VtZXBtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3OTY1MDEsImV4cCI6MjA5MTM3MjUwMX0.DdJkLOtczQpabJlZOScXV3OaeWk6Moy1oOMpoTKgpk4
-'
+const SUPABASE_URL = 'https://YOUR_PROJECT.supabase.co'
+const SUPABASE_KEY = 'YOUR_ANON_KEY'
 // -
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
 
@@ -626,7 +625,7 @@ const MSG_LABELS = ['SMS','LMS','MMS','알림톡','브랜드메시지','RCS']
 const MSG_COLORS = ['#185FA5','#534AB7','#0F6E56','#D85A30','#D4537E','#BA7517']
 const STATUS_ORDER = ['잠재','접촉','제안','협상','완료','실패']
 const STATUS_COLOR = {잠재:'b-gray',접촉:'b-blue',제안:'b-amber',협상:'b-purple',완료:'b-green',실패:'b-red'}
-const ACT_ICON = {전화:'📞',미팅:'🤝',메일:'✉️',기타:'📝'}
+const ACT_ICON = {전화:'&#128222;',미팅:'&#129306;',메일:'&#9993;',기타:'&#128221;'}
 const ACT_BG   = {전화:'#E6F1FB',미팅:'#E1F5EE',메일:'#FAEEDA',기타:'#EEEDFE'}
 
 // - 앱 시작 - 팀원 목록 로드
@@ -696,7 +695,7 @@ function switchUser() {
   if (chartPie)   { chartPie.destroy();   chartPie = null }
   document.getElementById('appScreen').style.display = 'none'
   document.getElementById('pickScreen').style.display = 'flex'
-  document.getElementById('sbScroll').innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px 10px"><span class="spin"></span>불러오는 중…</div>'
+  document.getElementById('sbScroll').innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px 10px"><span class="spin"></span>불러오는 중...</div>'
   showPage('msg')
 }
 
@@ -912,7 +911,7 @@ function renderSalesDashboard() {
       <div class="team-av">${u.name.slice(0,2)}</div>
       <div class="team-info">
         <div class="team-name">${e(u.name)}</div>
-        <div class="team-stat">리드 ${leads.filter(l=>l.assignee_id===u.id).length}건 · 활동 ${activities.filter(a=>a.user_id===u.id&&(a.activity_at||'').startsWith(ym)).length}건</div>
+        <div class="team-stat">리드 ${leads.filter(l=>l.assignee_id===u.id).length}건 &#183; 활동 ${activities.filter(a=>a.user_id===u.id&&(a.activity_at||'').startsWith(ym)).length}건</div>
         ${tg ? `<div class="prog-wrap"><div class="prog-bar" style="width:${Math.min(r,100)}%"></div></div>` : ''}
       </div>
       <div class="team-nums">
@@ -926,9 +925,9 @@ function renderSalesDashboard() {
     const u = allUsers.find(x=>x.id===a.user_id), l = leads.find(x=>x.id===a.lead_id)
     const dt = a.activity_at ? new Date(a.activity_at).toLocaleDateString('ko',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : ''
     return `<div class="act-item">
-      <div class="act-icon" style="background:${ACT_BG[a.type]||'#f0f0f0'}">${ACT_ICON[a.type]||'📝'}</div>
+      <div class="act-icon" style="background:${ACT_BG[a.type]||'#f0f0f0'}">${ACT_ICON[a.type]||'&#128221;'}</div>
       <div class="act-body">
-        <div class="act-title">${e(a.title)}${l?` <span style="font-size:11px;color:var(--text3)">· ${e(l.company)}</span>`:''}</div>
+        <div class="act-title">${e(a.title)}${l?` <span style="font-size:11px;color:var(--text3)">&#183; ${e(l.company)}</span>`:''}</div>
         <div class="act-meta">${u?e(u.name):''} ${dt}</div>
       </div>
     </div>`
@@ -1048,7 +1047,7 @@ function renderSb(){
       const row=document.createElement('div'),checked=selectedIds.has(t.id)
       row.className='tpl-item'+(sel===t.id?' sel':'')+(checked?' checked':'')
       row.draggable=!selectMode
-      row.innerHTML=`${selectMode?`<input type="checkbox" class="tpl-cb" ${checked?'checked':''} onclick="toggleCheck(event,'${t.id}')"/>`:`<span class="dh">\u283F</span>`}<span class="tn">${e(t.name)}</span>${!selectMode?`<span class="tpl-menu-btn" onclick="openCtx(event,'${t.id}')">•••</span>`:''}`
+      row.innerHTML=`${selectMode?`<input type="checkbox" class="tpl-cb" ${checked?'checked':''} onclick="toggleCheck(event,'${t.id}')"/>`:`<span class="dh">\u283F</span>`}<span class="tn">${e(t.name)}</span>${!selectMode?`<span class="tpl-menu-btn" onclick="openCtx(event,'${t.id}')">---</span>`:''}`
       row.onclick=ev=>{if(ev.target.classList.contains('tpl-cb')||ev.target.classList.contains('tpl-menu-btn'))return;if(selectMode){toggleCheck(ev,t.id);return}selT(t.id)}
       if(!selectMode){row.ondragstart=()=>{dragSrc=t.id;row.classList.add('dragging')};row.ondragend=()=>{row.classList.remove('dragging');document.querySelectorAll('.tpl-item').forEach(r=>r.classList.remove('drag-over'))};row.ondragover=ev=>{ev.preventDefault();row.classList.add('drag-over')};row.ondragleave=()=>row.classList.remove('drag-over');row.ondrop=async ev=>{ev.preventDefault();row.classList.remove('drag-over');if(dragSrc&&dragSrc!==t.id){const fi=tpls.findIndex(x=>x.id===dragSrc),ti=tpls.findIndex(x=>x.id===t.id);if(fi>=0&&ti>=0){const[item]=tpls.splice(fi,1);tpls.splice(ti,0,item);renderSb();await dbSaveOrder(tpls.map(x=>x.id))}}}}
       ci.appendChild(row)
@@ -1099,13 +1098,13 @@ function renderPanel(){
 }
 function pL(k,v){const t=tpls.find(x=>x.id===sel);if(!t)return;t[k]=v;if(k==='name'||k==='category')renderSb()}
 async function saveT(){const t=tpls.find(x=>x.id===sel);if(!t)return;t.name=document.getElementById('fN').value;t.category=document.getElementById('fCat').value;t.subject=document.getElementById('fS').value;t.body=document.getElementById('fB').value;await dbUpdate(t.id,{name:t.name,category:t.category,subject:t.subject,body:t.body,vars:t.vars});renderSb();const m=document.getElementById('okMsg');m.style.display='inline';setTimeout(()=>m.style.display='none',2000)}
-function renderVtags(t){const el=document.getElementById('vtags');if(!el)return;el.innerHTML=t.vars.map(v=>`<span class="vtag">{${e(v)}}<span class="vx" onclick="rmV('${e(v)}')">×</span></span>`).join('')}
+function renderVtags(t){const el=document.getElementById('vtags');if(!el)return;el.innerHTML=t.vars.map(v=>`<span class="vtag">{${e(v)}}<span class="vx" onclick="rmV('${e(v)}')">x</span></span>`).join('')}
 function addV(){const inp=document.getElementById('vi'),v=inp.value.trim().replace(/[{}]/g,'');if(!v)return;const t=tpls.find(x=>x.id===sel);if(!t||t.vars.includes(v)){inp.value='';return}t.vars.push(v);inp.value='';renderVtags(t)}
 function rmV(v){const t=tpls.find(x=>x.id===sel);if(!t)return;t.vars=t.vars.filter(x=>x!==v);renderVtags(t)}
 function setVal(k,v){vals[k]=v;const t=tpls.find(x=>x.id===sel);if(t)updatePreview(t)}
 function updatePreview(t){let s=t.subject,b=t.body;t.vars.forEach(v=>{const rx=new RegExp('\\{'+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\}','g');s=s.replace(rx,vals[v]||`{${v}}`);b=b.replace(rx,vals[v]||`{${v}}`)});const ps=document.getElementById('pSubj'),pb=document.getElementById('pBody'),pf=document.getElementById('pFiles');if(ps)ps.textContent=s;if(pb)pb.innerHTML=b.replace(/\{[^}]+\}/g,m=>`<span class="hi">${m}</span>`).replace(/\n/g,'<br>');if(pf)pf.innerHTML=files.map(f=>`<span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg2);border:0.5px solid var(--bd);border-radius:20px;padding:3px 10px;font-size:11px;color:var(--text2)">${e(f.name)}</span>`).join('')}
 function onFiles(inp){Array.from(inp.files).forEach(f=>{if(!files.find(x=>x.name===f.name&&x.size===f.size))files.push(f)});inp.value='';renderFlist();const t=tpls.find(x=>x.id===sel);if(t)updatePreview(t)}
-function renderFlist(){const el=document.getElementById('flist');if(!el)return;el.innerHTML=files.map((f,i)=>`<div class="fchip"><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px">${e(f.name)}</span><span style="font-size:11px;color:var(--text3);white-space:nowrap">${fmt(f.size)}</span><span style="cursor:pointer;color:var(--text3);font-size:12px" onclick="rmFile(${i})">✕</span></div>`).join('')}
+function renderFlist(){const el=document.getElementById('flist');if(!el)return;el.innerHTML=files.map((f,i)=>`<div class="fchip"><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px">${e(f.name)}</span><span style="font-size:11px;color:var(--text3);white-space:nowrap">${fmt(f.size)}</span><span style="cursor:pointer;color:var(--text3);font-size:12px" onclick="rmFile(${i})">&#x2715;</span></div>`).join('')}
 function rmFile(i){files.splice(i,1);renderFlist();const t=tpls.find(x=>x.id===sel);if(t)updatePreview(t)}
 function fmt(b){if(b<1024)return b+'B';if(b<1048576)return Math.round(b/1024)+'KB';return(b/1048576).toFixed(1)+'MB'}
 function copyAll(){const t=tpls.find(x=>x.id===sel);if(!t)return;let s=t.subject,b=t.body;t.vars.forEach(v=>{const rx=new RegExp('\\{'+v.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\}','g');s=s.replace(rx,vals[v]||`{${v}}`);b=b.replace(rx,vals[v]||`{${v}}`)});if(files.length)b+='\n\n첨부파일: '+files.map(f=>f.name).join(', ');navigator.clipboard.writeText(`제목: ${s}\n\n${b}`).then(()=>{const btn=document.getElementById('btnCopy');btn.textContent='복사 완료!';btn.style.color='var(--green)';setTimeout(()=>{btn.textContent='복사하기';btn.style.color=''},2000)})}
@@ -1114,7 +1113,7 @@ function openNewTpl(){document.getElementById('nName').value='';const s=document
 async function confirmNew(){const name=document.getElementById('nName').value.trim();if(!name){alert('이름을 입력하세요');return}const cat=document.getElementById('nCat').value;try{const cr=await dbCreate({name,category:cat,subject:`[${name}] {주제}`,vars:['수신자','발신자','주제'],body:'안녕하세요, {수신자}님.\n\n{발신자}입니다.\n\n{주제} 관련하여 연락드립니다.\n\n감사합니다.\n{발신자} 드림',sort_order:tpls.length});tpls.push(cr);closeModal('modalNew');renderSb();selT(cr.id)}catch(err){alert('생성 실패: '+err.message)}}
 
 // - SETTINGS -
-function renderCatTags(){const el=document.getElementById('catTagList');if(!el)return;el.innerHTML=cats.length?cats.map((c,i)=>`<span class="cat-tag">${e(c)}<span class="cx" onclick="removeCategory(${i})">×</span></span>`).join(''):'<span style="font-size:12px;color:var(--text3)">카테고리가 없어요</span>'}
+function renderCatTags(){const el=document.getElementById('catTagList');if(!el)return;el.innerHTML=cats.length?cats.map((c,i)=>`<span class="cat-tag">${e(c)}<span class="cx" onclick="removeCategory(${i})">x</span></span>`).join(''):'<span style="font-size:12px;color:var(--text3)">카테고리가 없어요</span>'}
 async function addCategory(){const inp=document.getElementById('newCatInput'),name=inp.value.trim();if(!name||cats.includes(name)){inp.value='';return}cats.push(name);inp.value='';await sb.from('users').update({categories:cats}).eq('id',currentUser.id);renderCatTags()}
 async function removeCategory(i){if(!confirm(`'${cats[i]}' 삭제?`))return;cats.splice(i,1);await sb.from('users').update({categories:cats}).eq('id',currentUser.id);renderCatTags()}
 
