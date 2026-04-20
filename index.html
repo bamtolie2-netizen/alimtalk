@@ -1133,6 +1133,99 @@ tr:hover .td-act{opacity:1}
   }
   .error-popup-btn:hover { opacity: 0.9; }
 
+
+/* === AEO 트래커 ===*/
+.aeo-wrap { color-scheme: dark; }
+
+.aeo-wrap {font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f3;color:#1a1a1a;padding:1.5rem;min-height:100vh}
+.aeo-container{max-width:860px;margin:0 auto}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:10px}
+.header-title{font-size:18px;font-weight:500}
+.header-sub{font-size:12px;color:#888;margin-top:2px}
+.tab-bar{display:flex;gap:2px;border-bottom:1px solid #e0e0d8;margin-bottom:1.5rem;overflow-x:auto}
+.tab{padding:8px 13px;font-size:13px;cursor:pointer;border:none;background:none;color:#888;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tab.active{color:#1a1a1a;border-bottom:2px solid #1a1a1a;font-weight:500}
+.section{display:none}.section.active{display:block}
+.card{background:#fff;border:0.5px solid #e0e0d8;border-radius:12px;padding:1.25rem;margin-bottom:1rem}
+.card-title{font-size:13px;font-weight:500;color:#1a1a1a;margin-bottom:12px}
+.metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
+.metric{background:#f5f5f3;border-radius:8px;padding:.875rem;text-align:center}
+.metric-label{font-size:11px;color:#888;margin-bottom:4px}
+.metric-value{font-size:20px;font-weight:500;color:#1a1a1a}
+.metric-sub{font-size:11px;color:#aaa;margin-top:2px}
+.ai-row{display:grid;grid-template-columns:90px 1fr 70px 70px;gap:8px;align-items:center;padding:9px 0;border-bottom:0.5px solid #e0e0d8;font-size:13px}
+.ai-row:last-child{border-bottom:none}
+.bar-wrap{background:#f0f0ec;border-radius:4px;height:7px;overflow:hidden}
+.bar{height:100%;border-radius:4px;transition:width .5s}
+.bar-gpt{background:#10a37f}.bar-gem{background:#4285F4}.bar-cld{background:#CC785C}
+.rank-badge{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:500}
+.r1{background:#FAC775;color:#633806}.r2{background:#D3D1C7;color:#444}.r3{background:#F0997B;color:#4A1B0C}.rn{background:#f0f0ec;color:#888}
+.rank-none{background:#fff0f0;color:#993C1D;font-size:11px;border-radius:8px;padding:3px 7px;white-space:nowrap}
+.mention-y{color:#0F6E56;font-weight:500}.mention-n{color:#993C1D}
+.q-item{display:flex;align-items:flex-start;gap:8px;padding:9px 0;border-bottom:0.5px solid #e0e0d8;font-size:13px}
+.q-item:last-child{border-bottom:none}
+.q-num{color:#aaa;min-width:18px;padding-top:1px;font-size:12px}
+.q-del{background:none;border:none;color:#aaa;cursor:pointer;font-size:15px;padding:0 3px}
+.q-del:hover{color:#e24b4a}
+.input-row{display:flex;gap:8px;margin-top:1rem}
+.input-row input{flex:1;padding:8px 12px;border:0.5px solid #ccc;border-radius:8px;font-size:13px;background:#fff;color:#1a1a1a}
+.input-row input:focus{outline:none;border-color:#999}
+.btn{padding:7px 14px;border:0.5px solid #ccc;border-radius:8px;cursor:pointer;font-size:13px;background:#fff;color:#1a1a1a;transition:background .15s}
+.btn:hover{background:#f5f5f3}
+.btn:active{transform:scale(0.98)}
+.btn-primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.btn-primary:hover{opacity:.85}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.btn-sm{padding:5px 10px;font-size:12px}
+.key-row{display:grid;grid-template-columns:110px 1fr;gap:8px;margin-bottom:8px;align-items:center}
+.key-row label{font-size:13px;color:#666}
+.key-row input,.key-row select{padding:6px 10px;border:0.5px solid #ccc;border-radius:8px;font-size:13px;background:#fff;color:#1a1a1a}
+.key-row input[type=password]{font-family:monospace}
+.key-row input:focus,.key-row select:focus{outline:none;border-color:#999}
+.log-box{background:#f5f5f3;border-radius:8px;padding:10px;font-size:11px;font-family:monospace;color:#666;max-height:130px;overflow-y:auto;margin-top:10px;line-height:1.6}
+.result-tbl{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+.result-tbl th{text-align:left;padding:6px 8px;color:#888;border-bottom:0.5px solid #e0e0d8;font-weight:500}
+.result-tbl td{padding:6px 8px;border-bottom:0.5px solid #e0e0d8;vertical-align:top;word-break:break-all}
+.result-tbl tr:last-child td{border-bottom:none}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid #ddd;border-top-color:#1a1a1a;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.prog-wrap{height:4px;background:#e0e0d8;border-radius:2px;overflow:hidden;margin:8px 0}
+.prog-fill{height:100%;background:#1a1a1a;border-radius:2px;transition:width .3s}
+.dot-ok{display:inline-block;width:7px;height:7px;border-radius:50%;background:#1D9E75;margin-right:5px}
+.dot-err{display:inline-block;width:7px;height:7px;border-radius:50%;background:#E24B4A;margin-right:5px}
+.trend-legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:10px;font-size:12px;color:#888}
+.legend-sq{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.sched-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:0.5px solid #e0e0d8}
+.sched-row:last-child{border-bottom:none}
+.toggle{position:relative;display:inline-block;width:36px;height:20px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;cursor:pointer;inset:0;background:#ccc;border-radius:10px;transition:.3s}
+.toggle-slider:before{content:'';position:absolute;width:14px;height:14px;left:3px;bottom:3px;background:white;border-radius:50%;transition:.3s}
+.toggle input:checked+.toggle-slider{background:#1D9E75}
+.toggle input:checked+.toggle-slider:before{transform:translateX(16px)}
+.preset-btn{padding:5px 10px;border:0.5px solid #e0e0d8;border-radius:8px;cursor:pointer;font-size:12px;background:#f5f5f3;color:#666}
+.preset-btn:hover{border-color:#999;color:#1a1a1a}
+.full-resp{font-size:11px;color:#666;background:#f5f5f3;border-radius:8px;padding:8px;margin-top:4px;white-space:pre-wrap;max-height:120px;overflow-y:auto;font-family:monospace;line-height:1.5}
+.info-box{background:#f0f5ff;border-radius:8px;padding:10px 12px;font-size:12px;color:#185FA5;margin-top:8px}
+.btn-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center}
+
+/* ── 보고 문구 탭 전용 ── */
+.report-preview{background:#f5f5f3;border-radius:10px;padding:1rem 1.25rem;font-size:13px;line-height:1.9;color:#1a1a1a;white-space:pre-wrap;word-break:keep-all;border:0.5px solid #e0e0d8;min-height:120px;cursor:text}
+.report-preview:focus{outline:none;border-color:#999}
+.copy-toast{display:inline-block;font-size:12px;color:#0F6E56;margin-left:8px;opacity:0;transition:opacity .3s}
+.copy-toast.show{opacity:1}
+.tone-btn{padding:5px 12px;border:0.5px solid #e0e0d8;border-radius:20px;cursor:pointer;font-size:12px;background:#fff;color:#666}
+.tone-btn.active{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.tone-btn:hover:not(.active){background:#f5f5f3}
+.kakao-bubble{background:#FEE500;border-radius:14px 14px 14px 4px;padding:12px 14px;font-size:13px;line-height:1.8;color:#1a1a1a;white-space:pre-wrap;word-break:keep-all;max-width:340px;margin:0 auto;position:relative}
+.sms-bubble{background:#e8e8e8;border-radius:14px 14px 14px 4px;padding:12px 14px;font-size:13px;line-height:1.8;color:#1a1a1a;white-space:pre-wrap;word-break:keep-all;max-width:320px;margin:0 auto}
+.bubble-wrap{background:#d4dde6;border-radius:12px;padding:20px 16px;margin-bottom:12px}
+.ai-badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:500}
+.badge-gen{background:#e8f5e9;color:#2e7d32}
+.badge-warn{background:#fff3e0;color:#e65100}
+.badge-bad{background:#ffebee;color:#c62828}
+.section-divider{height:0.5px;background:#e0e0d8;margin:12px 0}
+
 </style>
 </head>
 <body>
@@ -1163,6 +1256,7 @@ tr:hover .td-act{opacity:1}
     <div class="nav-tab"     id="nav-tdl"      onclick="showPage('tdl')">TDL</div>
     <div class="nav-tab"     id="nav-rnr"      onclick="showPage('rnr')">R&amp;R</div>
     <div class="nav-tab"     id="nav-notion"   onclick="showPage('notion')">미팅캘린더</div>
+    <div class="nav-tab"     id="nav-aeo"      onclick="showPage('aeo')">AEO 트래커</div>
     <div class="nav-tab"     id="nav-mail"     onclick="showPage('mail')">메일초안</div>
     <div class="nav-tab"     id="nav-settings" onclick="showPage('settings')">설정</div>
     <div class="nav-right">
@@ -1522,6 +1616,201 @@ tr:hover .td-act{opacity:1}
     </div>
   </div>
 
+
+  <!-- AEO 트래커 -->
+  <div class="page" id="page-aeo">
+    <div class="aeo-wrap" id="aeo-wrap" style="height:100%;overflow-y:auto;background:#0f1117">
+<div class="aeo-container">
+
+<div class="header">
+  <div>
+    <div class="header-title">슈어엠 AEO 트래커 <span style="font-size:12px;font-weight:400;color:#aaa">v3</span></div>
+    <div class="header-sub" id="last-run-label">마지막 실행: —</div>
+  </div>
+  <div style="display:flex;gap:8px">
+    <button class="btn btn-sm" onclick="exportCSV()">CSV 내보내기</button>
+    <button class="btn btn-primary" id="run-btn" onclick="runAnalysis()">지금 실행</button>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab active" onclick="aeoSwitchTab('dashboard',this)">대시보드</button>
+  <button class="tab" onclick="aeoSwitchTab('report',this)">의장 보고 문구</button>
+  <button class="tab" onclick="aeoSwitchTab('trend',this)">트렌드</button>
+  <button class="tab" onclick="aeoSwitchTab('fullresp',this)">전체 응답</button>
+  <button class="tab" onclick="aeoSwitchTab('questions',this)">질문 관리</button>
+  <button class="tab" onclick="aeoSwitchTab('schedule',this)">스케줄&이메일</button>
+  <button class="tab" onclick="aeoSwitchTab('settings',this)">API 설정</button>
+</div>
+
+<!-- DASHBOARD -->
+<div class="section active" id="tab-dashboard">
+  <div class="metric-grid">
+    <div class="metric"><div class="metric-label">오늘 질문 수</div><div class="metric-value" id="m-total">—</div><div class="metric-sub">질문 목록 기준</div></div>
+    <div class="metric"><div class="metric-label">슈어엠 언급률</div><div class="metric-value" id="m-mention">—</div><div class="metric-sub">3개 AI 평균</div></div>
+    <div class="metric"><div class="metric-label">평균 순위</div><div class="metric-value" id="m-rank">—</div><div class="metric-sub">언급된 경우</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">AI별 슈어엠 언급 현황</div>
+    <div id="ai-rows"><div style="color:#aaa;font-size:13px;padding:1.5rem;text-align:center">실행 버튼을 눌러 분석을 시작하세요</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">질문별 결과 요약</div>
+    <div id="dash-summary"><div style="color:#aaa;font-size:13px;text-align:center;padding:1rem">결과 없음</div></div>
+  </div>
+</div>
+
+<!-- 의장 보고 문구 -->
+<div class="section" id="tab-report">
+  <div class="card">
+    <div class="card-title">보고 톤 선택</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="tone-btn active" onclick="setTone('formal',this)">정중한 공식 보고</button>
+      <button class="tone-btn" onclick="setTone('brief',this)">간결 요약</button>
+      <button class="tone-btn" onclick="setTone('positive',this)">성과 강조</button>
+      <button class="tone-btn" onclick="setTone('action',this)">개선 액션 중심</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+      <div class="card-title" style="margin:0">카카오톡 / 문자 보고 문구</div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <button class="btn btn-sm" onclick="regenerateReport()">다시 생성</button>
+        <button class="btn btn-sm btn-primary" onclick="copyReport()">복사</button>
+        <span class="copy-toast" id="copy-toast">복사됨!</span>
+      </div>
+    </div>
+    <div class="bubble-wrap" id="bubble-wrap">
+      <div class="kakao-bubble" id="report-bubble">분석을 실행하면 보고 문구가 자동 생성됩니다.</div>
+    </div>
+    <div style="font-size:11px;color:#aaa;text-align:center">위 문구를 복사해서 카카오톡/문자에 붙여넣기 하세요</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">전문 보고서 (편집 가능)</div>
+    <div contenteditable="true" class="report-preview" id="report-full">분석을 실행하면 보고서가 자동 완성됩니다.</div>
+    <div class="btn-row">
+      <button class="btn btn-sm" onclick="copyFull()">전문 복사</button>
+      <button class="btn btn-sm" onclick="regenerateReport()">다시 생성</button>
+      <span class="copy-toast" id="copy-toast2"></span>
+    </div>
+  </div>
+</div>
+
+<!-- TREND -->
+<div class="section" id="tab-trend">
+  <div class="card">
+    <div class="card-title">날짜별 언급률 추이</div>
+    <div class="trend-legend">
+      <span><span class="legend-sq" style="background:#10a37f"></span>ChatGPT</span>
+      <span><span class="legend-sq" style="background:#4285F4"></span>Gemini</span>
+      <span><span class="legend-sq" style="background:#CC785C"></span>Claude</span>
+    </div>
+    <div style="position:relative;width:100%;height:240px"><canvas id="trendChart" role="img" aria-label="날짜별 AI 언급률 추이 차트">슈어엠 AI 언급률 트렌드</canvas></div>
+  </div>
+  <div class="card">
+    <div class="card-title">일별 기록 내역</div>
+    <div id="history-list"><div style="color:#aaa;font-size:13px;text-align:center;padding:1rem">누적 데이터 없음 — 매일 실행하면 자동으로 쌓입니다</div></div>
+  </div>
+</div>
+
+<!-- FULL RESPONSES -->
+<div class="section" id="tab-fullresp">
+  <div id="fullresp-area"><div style="color:#aaa;font-size:13px;text-align:center;padding:2rem">아직 실행 결과가 없습니다</div></div>
+</div>
+
+<!-- QUESTIONS -->
+<div class="section" id="tab-questions">
+  <div class="card">
+    <div class="card-title">질문 목록 <span style="color:#aaa;font-weight:400" id="q-count">(0개)</span></div>
+    <div id="q-list"></div>
+    <div class="input-row">
+      <input type="text" id="q-input" placeholder="새 질문 입력 — 엑셀 여러 줄 붙여넣기도 가능" onkeydown="if(event.key==='Enter')addQuestion()"/>
+      <button class="btn" onclick="addQuestion()">추가</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">예시 질문 빠른 추가</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <button class="preset-btn" onclick="addPreset(this)">문자발송 업체 추천해줘</button>
+      <button class="preset-btn" onclick="addPreset(this)">SMS 발송 서비스 어디가 좋아?</button>
+      <button class="preset-btn" onclick="addPreset(this)">카카오 비즈메시지 발송 업체 추천</button>
+      <button class="preset-btn" onclick="addPreset(this)">국제 문자 발송 업체 비교해줘</button>
+      <button class="preset-btn" onclick="addPreset(this)">기업용 문자 API 서비스 추천</button>
+      <button class="preset-btn" onclick="addPreset(this)">대량 문자 발송 플랫폼 추천</button>
+      <button class="preset-btn" onclick="addPreset(this)">알림톡 발송 업체 비교</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCHEDULE & EMAIL -->
+<div class="section" id="tab-schedule">
+  <div class="card">
+    <div class="card-title">자동 실행 스케줄</div>
+    <div class="sched-row">
+      <label class="toggle"><input type="checkbox" id="sched-on" onchange="updateSchedule()"><span class="toggle-slider"></span></label>
+      <span style="font-size:13px">매일 자동 실행</span>
+    </div>
+    <div class="sched-row">
+      <span style="font-size:13px;color:#666;width:100px">실행 시간</span>
+      <input type="time" id="sched-time" value="09:00" style="padding:5px 8px;border:0.5px solid #ccc;border-radius:8px;font-size:13px" onchange="updateSchedule()"/>
+    </div>
+    <div class="sched-row">
+      <span style="font-size:13px;color:#666;width:100px">다음 실행</span>
+      <span style="font-size:13px" id="next-run-label">—</span>
+    </div>
+    <div class="info-box">이 페이지(브라우저 탭)가 열려 있는 동안에만 스케줄이 동작합니다.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">이메일 보고서 발송</div>
+    <div class="key-row"><label>수신 이메일</label><input type="email" id="email-to" placeholder="report@surem.com"/></div>
+    <div class="key-row"><label>발신 방식</label>
+      <select id="email-method" onchange="toggleEmailFields()">
+        <option value="mailto">mailto: (기본 메일앱)</option>
+        <option value="sendgrid">SendGrid API</option>
+      </select>
+    </div>
+    <div id="sendgrid-row" style="display:none">
+      <div class="key-row"><label>SendGrid 키</label><input type="password" id="key-sendgrid" placeholder="SG.xxx"/></div>
+      <div class="key-row"><label>발신 이메일</label><input type="text" id="email-from" placeholder="noreply@surem.com"/></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="testEmail()">테스트 발송</button>
+      <button class="btn" onclick="sendReport()">지금 보고서 발송</button>
+      <label class="toggle" style="margin-left:auto"><input type="checkbox" id="auto-email"><span class="toggle-slider"></span></label>
+      <span style="font-size:13px;color:#666;align-self:center">실행 후 자동 발송</span>
+    </div>
+    <div id="email-status" style="margin-top:8px;font-size:12px;color:#888"></div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="section" id="tab-settings">
+  <div class="card">
+    <div class="card-title">API 키 설정</div>
+    <div class="key-row"><label>OpenAI</label><input type="password" id="key-openai" placeholder="sk-..."/></div>
+    <div class="key-row"><label>Google (Gemini)</label><input type="password" id="key-google" placeholder="AIza..."/></div>
+    <div class="key-row"><label>Anthropic (Claude)</label><input type="password" id="key-anthropic" placeholder="sk-ant-..."/></div>
+    <div style="font-size:12px;color:#aaa;margin-top:6px">키는 세션 메모리에만 저장됩니다. 페이지를 닫으면 재입력 필요.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">감지 설정</div>
+    <div class="key-row"><label>주요 키워드</label><input type="text" id="keyword" value="슈어엠"/></div>
+    <div class="key-row"><label>추가 키워드</label><input type="text" id="keyword2" value="SureM,SUREM,surem"/></div>
+    <div style="font-size:12px;color:#aaa;margin-top:4px">AI 응답에 이 키워드가 있으면 언급된 것으로 판단합니다 (쉼표로 구분)</div>
+  </div>
+  <div class="card">
+    <div class="card-title">보고 설정</div>
+    <div class="key-row"><label>보고자 이름</label><input type="text" id="reporter-name" placeholder="홍길동 매니저"/></div>
+    <div class="key-row"><label>의장 호칭</label><input type="text" id="chairman-title" value="의장님"/></div>
+  </div>
+</div>
+
+</div>
+    </div>
+  </div>
+
   <!-- MAIL -->
   <div class="page" id="page-mail">
     <div class="mail-layout">
@@ -1866,7 +2155,7 @@ function switchUser() {
 }
 
 function showPage(p) {
-  ['dash','msg','sales','outbound','improve','tdl','rnr','notion','mail','settings'].forEach(id => {
+  ['dash','msg','sales','outbound','improve','tdl','rnr','notion','aeo','mail','settings'].forEach(id => {
     document.getElementById('page-'+id).classList.toggle('on', id===p)
     document.getElementById('nav-'+id).classList.toggle('on', id===p)
   })
@@ -1877,6 +2166,7 @@ function showPage(p) {
   if (p==='tdl') renderTdl()
   if (p==='rnr') renderRnr()
   if (p==='notion') { loadMeetings() }
+  if (p==='aeo') { /* AEO 트래커 - 자동 초기화 없음 */ }
   if (p==='settings') { renderCatTags(); renderMemberManage() }
 }
 
@@ -4443,6 +4733,510 @@ document.getElementById('dailyTopList').addEventListener('click', function(e) {
 // VOC: 탭 진입 시 renderOverview() 호출됨
 
 // === VOC v1.1 END ===
+
+// === AEO 트래커 ===
+
+let questions = ["문자발송 업체 추천해줘","카카오 비즈메시지 발송 업체 추천해줘","SMS 발송 서비스 어디가 좋아?"];
+let results = [];
+let aeoHistory = [];
+let running = false;
+let schedTimer = null;
+let trendChartInst = null;
+let currentTone = 'formal';
+
+function aeoSwitchTab(id, el) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  if(id==='trend') renderTrendChart();
+}
+
+function setTone(tone, btn) {
+  currentTone = tone;
+  document.querySelectorAll('.tone-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(results.length) regenerateReport();
+}
+
+function getKeywords() {
+  const k1 = document.getElementById('keyword').value.trim();
+  const k2 = document.getElementById('keyword2').value.trim();
+  return [k1,...k2.split(',').map(k=>k.trim())].filter(Boolean);
+}
+
+function detectMention(text, kws) {
+  const l = text.toLowerCase();
+  return kws.some(k=>l.includes(k.toLowerCase()));
+}
+
+function detectRank(text, kws) {
+  const lines = text.split(/\n|(?=\d+[.)]\s)/);
+  for(let i=0;i<lines.length;i++){
+    const l=lines[i];
+    if(kws.some(k=>l.toLowerCase().includes(k.toLowerCase()))){
+      const m=l.match(/^(\d+)/);
+      if(m) return parseInt(m[1]);
+      return i+1;
+    }
+  }
+  return null;
+}
+
+async function callClaude(q, key) {
+  if(!key) return {text:'API 키 없음',error:true};
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':key,'anthropic-version':'2023-06-01'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,
+        system:'당신은 기업 IT 담당자에게 문자발송/메시지 서비스 업체를 추천하는 전문가입니다. 업체명과 순위를 번호 목록으로 명확히 답변하세요.',
+        messages:[{role:'user',content:q}]})});
+    const d=await r.json();
+    return {text:d.content?.[0]?.text||'응답 없음',error:false};
+  } catch(e){return {text:'오류: '+e.message,error:true};}
+}
+
+async function callOpenAI(q, key) {
+  if(!key) return {text:'API 키 없음',error:true};
+  try {
+    const r = await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+      body:JSON.stringify({model:'gpt-4o-mini',max_tokens:600,
+        messages:[
+          {role:'system',content:'당신은 기업 IT 담당자에게 문자발송/메시지 서비스 업체를 추천하는 전문가입니다. 업체명과 순위를 번호 목록으로 명확히 답변하세요.'},
+          {role:'user',content:q}]})});
+    const d=await r.json();
+    return {text:d.choices?.[0]?.message?.content||'응답 없음',error:false};
+  } catch(e){return {text:'오류: '+e.message,error:true};}
+}
+
+async function callGemini(q, key) {
+  if(!key) return {text:'API 키 없음',error:true};
+  try {
+    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,{method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents:[{parts:[{text:'당신은 기업 IT 담당자에게 문자발송/메시지 서비스 업체를 추천하는 전문가입니다. 업체명과 순위를 번호 목록으로 명확히 답변하세요.\n\n'+q}]}]})});
+    const d=await r.json();
+    return {text:d.candidates?.[0]?.content?.parts?.[0]?.text||'응답 없음',error:false};
+  } catch(e){return {text:'오류: '+e.message,error:true};}
+}
+
+function addLog(msg, el) {
+  const t=new Date().toLocaleTimeString('ko-KR');
+  el.innerHTML+=`<div>[${t}] ${msg}</div>`;
+  el.scrollTop=el.scrollHeight;
+}
+
+async function runAnalysis() {
+  if(running) return;
+  if(!questions.length){alert('질문을 먼저 추가해주세요');switchTab('questions',document.querySelectorAll('.tab')[4]);return;}
+  const kOAI=document.getElementById('key-openai').value.trim();
+  const kGEM=document.getElementById('key-google').value.trim();
+  const kANT=document.getElementById('key-anthropic').value.trim();
+  const kws=getKeywords();
+  running=true; results=[];
+  const btn=document.getElementById('run-btn');
+  btn.disabled=true; btn.innerHTML='<span class="spin"></span> 분석 중...';
+  aeoSwitchTab('dashboard',document.querySelectorAll('.tab')[0]);
+  const aiEl=document.getElementById('ai-rows');
+  aiEl.innerHTML=`<div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div><div class="log-box" id="rlog"></div>`;
+  const log=document.getElementById('rlog');
+  const prog=document.getElementById('prog');
+  addLog('분석 시작: '+questions.length+'개 질문 × 3개 AI',log);
+  const total=questions.length*3; let done=0;
+  for(let qi=0;qi<questions.length;qi++){
+    const q=questions[qi];
+    addLog(`[${qi+1}/${questions.length}] "${q.substring(0,24)}…"`,log);
+    const [gpt,gem,cld]=await Promise.all([callOpenAI(q,kOAI),callGemini(q,kGEM),callClaude(q,kANT)]);
+    done+=3; prog.style.width=Math.round(done/total*100)+'%';
+    const row={question:q,
+      gpt:{...gpt,mentioned:!gpt.error&&detectMention(gpt.text,kws),rank:!gpt.error?detectRank(gpt.text,kws):null},
+      gem:{...gem,mentioned:!gem.error&&detectMention(gem.text,kws),rank:!gem.error?detectRank(gem.text,kws):null},
+      cld:{...cld,mentioned:!cld.error&&detectMention(cld.text,kws),rank:!cld.error?detectRank(cld.text,kws):null}};
+    const f=[row.gpt.mentioned?'GPT✓':'GPT✗',row.gem.mentioned?'GEM✓':'GEM✗',row.cld.mentioned?'CLD✓':'CLD✗'];
+    addLog(f.join(' | '),log);
+    results.push(row);
+  }
+  addLog('완료!',log);
+  const now=new Date();
+  document.getElementById('last-run-label').textContent='마지막 실행: '+now.toLocaleString('ko-KR');
+  const n=results.length;
+  const gM=results.filter(r=>r.gpt.mentioned).length;
+  const geM=results.filter(r=>r.gem.mentioned).length;
+  const cM=results.filter(r=>r.cld.mentioned).length;
+  aeoHistory.push({date:now.toLocaleDateString('ko-KR'),gpt:Math.round(gM/n*100),gem:Math.round(geM/n*100),cld:Math.round(cM/n*100),gptM:gM,gemM:geM,cldM:cM,n});
+  renderDashboard(); renderFullResp(); renderHistory(); regenerateReport();
+  running=false; btn.disabled=false; btn.textContent='다시 실행';
+  if(document.getElementById('auto-email').checked) sendEmailReport();
+}
+
+/* ──────────────────────────────────────────
+   보고 문구 생성 로직
+────────────────────────────────────────── */
+function getStats() {
+  const n=results.length;
+  const gM=results.filter(r=>r.gpt.mentioned).length;
+  const geM=results.filter(r=>r.gem.mentioned).length;
+  const cM=results.filter(r=>r.cld.mentioned).length;
+  const gPct=Math.round(gM/n*100);
+  const gePct=Math.round(geM/n*100);
+  const cPct=Math.round(cM/n*100);
+  const avgPct=Math.round((gM+geM+cM)/(n*3)*100);
+  const ranks=results.flatMap(r=>[r.gpt,r.gem,r.cld]).filter(x=>x.rank).map(x=>x.rank);
+  const avgRank=ranks.length?(ranks.reduce((a,b)=>a+b,0)/ranks.length).toFixed(1):null;
+  const gRanks=results.filter(r=>r.gpt.rank).map(r=>r.gpt.rank);
+  const geRanks=results.filter(r=>r.gem.rank).map(r=>r.gem.rank);
+  const cRanks=results.filter(r=>r.cld.rank).map(r=>r.cld.rank);
+  const avgR=arr=>arr.length?(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(1):null;
+  return {n,gM,geM,cM,gPct,gePct,cPct,avgPct,avgRank,
+    gRank:avgR(gRanks),geRank:avgR(geRanks),cRank:avgR(cRanks)};
+}
+
+function statusEmoji(pct) {
+  if(pct>=70) return '🟢';
+  if(pct>=40) return '🟡';
+  return '🔴';
+}
+
+function assessment(avgPct, avgRank) {
+  if(avgPct>=70 && avgRank && parseFloat(avgRank)<=2) return '전반적으로 매우 우수한 AEO 성과를 보이고 있습니다.';
+  if(avgPct>=50) return '양호한 수준이나 일부 AI에서 노출 강화가 필요합니다.';
+  if(avgPct>=30) return '노출률 개선이 시급하며, 콘텐츠 최적화 전략 검토가 필요합니다.';
+  return '대부분의 AI에서 미노출 상태로, 즉각적인 AEO 전략 수립이 필요합니다.';
+}
+
+function buildKakaoMsg(s) {
+  const chairman=document.getElementById('chairman-title').value||'의장님';
+  const reporter=document.getElementById('reporter-name').value||'담당자';
+  const now=new Date();
+  const dateStr=`${now.getMonth()+1}/${now.getDate()}(${['일','월','화','수','목','금','토'][now.getDay()]})`;
+
+  if(currentTone==='formal') {
+    return `${chairman}, 안녕하세요. ${reporter}입니다.
+
+📊 [${dateStr} AEO 모니터링 결과]
+
+■ 분석 질문: ${s.n}개
+■ 슈어엠 평균 언급률: ${s.avgPct}%
+■ 평균 노출 순위: ${s.avgRank ? s.avgRank+'위' : '미노출'}
+
+${statusEmoji(s.gPct)} ChatGPT: ${s.gPct}% ${s.gRank?'('+s.gRank+'위)':'(미노출)'}
+${statusEmoji(s.gePct)} Gemini: ${s.gePct}% ${s.geRank?'('+s.geRank+'위)':'(미노출)'}
+${statusEmoji(s.cPct)} Claude: ${s.cPct}% ${s.cRank?'('+s.cRank+'위)':'(미노출)'}
+
+▶ ${assessment(s.avgPct, s.avgRank)}
+
+상세 내용은 별도 보고서로 공유 드리겠습니다.
+감사합니다.`;
+  }
+
+  if(currentTone==='brief') {
+    return `${chairman} ${dateStr} AEO 결과 보고드립니다.
+
+평균 언급률 ${s.avgPct}% / 평균 ${s.avgRank ? s.avgRank+'위' : '미노출'}
+GPT ${s.gPct}% · Gemini ${s.gePct}% · Claude ${s.cPct}%
+
+${assessment(s.avgPct, s.avgRank)}`;
+  }
+
+  if(currentTone==='positive') {
+    const best = Math.max(s.gPct,s.gePct,s.cPct);
+    const bestAI = s.gPct===best?'ChatGPT':s.gePct===best?'Gemini':'Claude';
+    return `${chairman}, ${reporter}입니다. 📈
+
+오늘(${dateStr}) AEO 모니터링 결과를 공유드립니다.
+
+✅ 전체 평균 언급률 ${s.avgPct}% 달성
+✅ ${bestAI}에서 ${best}% 최고 성과 기록
+✅ 평균 노출 순위: ${s.avgRank ? s.avgRank+'위' : '—'}
+
+${statusEmoji(s.gPct)} ChatGPT ${s.gPct}% ${s.gRank?'| '+s.gRank+'위':''}
+${statusEmoji(s.gePct)} Gemini ${s.gePct}% ${s.geRank?'| '+s.geRank+'위':''}
+${statusEmoji(s.cPct)} Claude ${s.cPct}% ${s.cRank?'| '+s.cRank+'위':''}
+
+지속적인 콘텐츠 최적화로 성과를 이어가겠습니다.
+감사합니다.`;
+  }
+
+  if(currentTone==='action') {
+    const weakAIs=[];
+    if(s.gPct<50) weakAIs.push('ChatGPT');
+    if(s.gePct<50) weakAIs.push('Gemini');
+    if(s.cPct<50) weakAIs.push('Claude');
+    const actionLine = weakAIs.length
+      ? `→ ${weakAIs.join(', ')} 노출 강화를 위한 콘텐츠 보강 조치 예정`
+      : '→ 현재 전략 유지 및 상위 순위 안착 집중';
+    return `${chairman}, ${reporter}입니다.
+
+📋 [${dateStr} AEO 현황 & 개선 계획]
+
+현황:
+• 평균 언급률: ${s.avgPct}% (GPT ${s.gPct}% / Gemini ${s.gePct}% / Claude ${s.cPct}%)
+• 평균 순위: ${s.avgRank ? s.avgRank+'위' : '미노출'}
+
+${actionLine}
+
+다음 보고 시 개선 결과 함께 공유 드리겠습니다.`;
+  }
+  return '';
+}
+
+function buildFullReport(s) {
+  const chairman=document.getElementById('chairman-title').value||'의장님';
+  const reporter=document.getElementById('reporter-name').value||'담당자';
+  const now=new Date().toLocaleString('ko-KR');
+
+  const detailRows = results.map((r,i)=>{
+    const g=r.gpt.mentioned?(r.gpt.rank?r.gpt.rank+'위':'언급'):'미언급';
+    const ge=r.gem.mentioned?(r.gem.rank?r.gem.rank+'위':'언급'):'미언급';
+    const c=r.cld.mentioned?(r.cld.rank?r.cld.rank+'위':'언급'):'미언급';
+    return `  ${i+1}. "${r.question}"\n     ChatGPT: ${g} | Gemini: ${ge} | Claude: ${c}`;
+  }).join('\n');
+
+  const trend = aeoHistory.length>=2
+    ? (() => {
+        const prev=history[aeoHistory.length-2];
+        const curr=history[aeoHistory.length-1];
+        const diff=curr.gpt+curr.gem+curr.cld - (prev.gpt+prev.gem+prev.cld);
+        if(diff>0) return `전일 대비 언급률 합산 +${diff}%p 상승`;
+        if(diff<0) return `전일 대비 언급률 합산 ${diff}%p 하락`;
+        return '전일 대비 변동 없음';
+      })()
+    : '비교 데이터 없음 (첫 번째 실행)';
+
+  return `수신: ${chairman}
+발신: ${reporter}
+일시: ${now}
+제목: 슈어엠 AEO 모니터링 보고
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. 분석 개요
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+• 분석 질문 수: ${s.n}개
+• 분석 AI: ChatGPT / Gemini / Claude (3종)
+• 추적 키워드: 슈어엠(SureM)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+2. 핵심 지표
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+• 전체 평균 언급률: ${s.avgPct}%
+• 평균 노출 순위: ${s.avgRank ? s.avgRank+'위' : '미노출'}
+• 추이: ${trend}
+
+  ┌─────────────┬───────────┬──────────┐
+  │ AI          │ 언급률    │ 평균순위 │
+  ├─────────────┼───────────┼──────────┤
+  │ ChatGPT     │ ${String(s.gPct+'%').padEnd(9)} │ ${String(s.gRank ? s.gRank+'위' : '미노출').padEnd(8)} │
+  │ Gemini      │ ${String(s.gePct+'%').padEnd(9)} │ ${String(s.geRank ? s.geRank+'위' : '미노출').padEnd(8)} │
+  │ Claude      │ ${String(s.cPct+'%').padEnd(9)} │ ${String(s.cRank ? s.cRank+'위' : '미노출').padEnd(8)} │
+  └─────────────┴───────────┴──────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+3. 질문별 상세 결과
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+${detailRows}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+4. 종합 의견
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+${assessment(s.avgPct, s.avgRank)}
+${s.avgPct<50?'\n개선 제안:\n• AI 학습 데이터에 반영될 수 있도록 공식 웹사이트, 블로그, 리뷰 콘텐츠 강화\n• 주요 키워드 중심의 FAQ 페이지 구성 검토\n• 업계 미디어 노출 및 링크 빌딩 추진':'\n유지 전략:\n• 현재 콘텐츠 전략 지속 유지\n• 상위 순위 안착을 위한 정기 모니터링 지속'}
+
+이상으로 보고 드립니다.
+${reporter} 드림`;
+}
+
+function regenerateReport() {
+  if(!results.length) return;
+  const s = getStats();
+  const kakaoMsg = buildKakaoMsg(s);
+  const fullReport = buildFullReport(s);
+  document.getElementById('report-bubble').textContent = kakaoMsg;
+  document.getElementById('report-full').textContent = fullReport;
+}
+
+function copyReport() {
+  const text = document.getElementById('report-bubble').textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    const t=document.getElementById('copy-toast');
+    t.textContent='복사됨!'; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2000);
+  });
+}
+
+function copyFull() {
+  const text = document.getElementById('report-full').textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    const t=document.getElementById('copy-toast2');
+    t.textContent='전문 복사됨!'; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2000);
+  });
+}
+
+/* ── 대시보드 렌더 ── */
+function renderDashboard() {
+  if(!results.length) return;
+  const s=getStats(); const n=s.n;
+  document.getElementById('m-total').textContent=n;
+  document.getElementById('m-mention').textContent=s.avgPct+'%';
+  document.getElementById('m-rank').textContent=s.avgRank?s.avgRank+'위':'—';
+  const ais=[{name:'ChatGPT',m:s.gM,r:s.gRank,cls:'bar-gpt'},{name:'Gemini',m:s.geM,r:s.geRank,cls:'bar-gem'},{name:'Claude',m:s.cM,r:s.cRank,cls:'bar-cld'}];
+  document.getElementById('ai-rows').innerHTML=ais.map(ai=>{
+    const p=Math.round(ai.m/n*100);
+    const ri=ai.r?Math.round(parseFloat(ai.r)):99;
+    const badge=ai.r?`<span class="rank-badge ${ri<=3?'r'+ri:'rn'}">${ai.r}</span>`:`<span class="rank-none">미언급</span>`;
+    return `<div class="ai-row">
+      <div style="font-weight:500;font-size:13px">${ai.name}</div>
+      <div><div style="display:flex;align-items:center;gap:8px"><div class="bar-wrap" style="flex:1"><div class="bar ${ai.cls}" style="width:${p}%"></div></div><span style="font-size:12px;color:#888;min-width:30px">${p}%</span></div><div style="font-size:11px;color:#aaa;margin-top:2px">${ai.m}/${n}회</div></div>
+      <div style="text-align:center">${badge}</div>
+      <div style="text-align:center"><span class="${ai.m>0?'dot-ok':'dot-err'}"></span><span style="font-size:12px;color:#888">${ai.m>0?'양호':'미감지'}</span></div>
+    </div>`;
+  }).join('');
+  document.getElementById('dash-summary').innerHTML=`<div style="overflow-x:auto"><table class="result-tbl"><colgroup><col style="width:40%"><col style="width:20%"><col style="width:20%"><col style="width:20%"></colgroup>
+    <tr><th>질문</th><th>GPT</th><th>Gemini</th><th>Claude</th></tr>
+    ${results.map(r=>`<tr>
+      <td style="word-break:keep-all">${r.question.length>28?r.question.substring(0,28)+'…':r.question}</td>
+      <td class="${r.gpt.mentioned?'mention-y':'mention-n'}">${r.gpt.mentioned?(r.gpt.rank?r.gpt.rank+'위':'언급'):'미언급'}</td>
+      <td class="${r.gem.mentioned?'mention-y':'mention-n'}">${r.gem.mentioned?(r.gem.rank?r.gem.rank+'위':'언급'):'미언급'}</td>
+      <td class="${r.cld.mentioned?'mention-y':'mention-n'}">${r.cld.mentioned?(r.cld.rank?r.cld.rank+'위':'언급'):'미언급'}</td>
+    </tr>`).join('')}</table></div>`;
+}
+
+function renderFullResp() {
+  const el=document.getElementById('fullresp-area');
+  if(!results.length){el.innerHTML='<div style="color:#aaa;font-size:13px;text-align:center;padding:2rem">결과 없음</div>';return;}
+  el.innerHTML=results.map((r,i)=>`
+    <div class="card">
+      <div class="card-title">Q${i+1}. ${r.question}</div>
+      ${['gpt','gem','cld'].map(k=>{
+        const ai=k==='gpt'?'ChatGPT':k==='gem'?'Gemini':'Claude';
+        const d=r[k];
+        return `<div style="margin-bottom:10px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+            <span style="font-size:13px;font-weight:500;width:70px">${ai}</span>
+            <span class="${d.mentioned?'mention-y':'mention-n'}" style="font-size:12px">${d.mentioned?(d.rank?d.rank+'위 언급':'언급됨'):'미언급'}</span>
+            ${d.error?'<span style="font-size:11px;color:#e24b4a">오류</span>':''}
+          </div>
+          <div class="full-resp">${d.text}</div>
+        </div>`;
+      }).join('')}
+    </div>`).join('');
+}
+
+function renderTrendChart() {
+  if(!aeoHistory.length) return;
+  if(trendChartInst) trendChartInst.destroy();
+  trendChartInst=new Chart(document.getElementById('trendChart'),{type:'line',
+    data:{labels:history.map(h=>h.date),datasets:[
+      {label:'ChatGPT',data:history.map(h=>h.gpt),borderColor:'#10a37f',backgroundColor:'rgba(16,163,127,.1)',tension:.3,pointRadius:4,fill:true,borderDash:[]},
+      {label:'Gemini',data:history.map(h=>h.gem),borderColor:'#4285F4',backgroundColor:'rgba(66,133,244,.1)',tension:.3,pointRadius:4,fill:true,borderDash:[5,3]},
+      {label:'Claude',data:history.map(h=>h.cld),borderColor:'#CC785C',backgroundColor:'rgba(204,120,92,.08)',tension:.3,pointRadius:4,fill:true,borderDash:[2,2]}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%',font:{size:11}},grid:{color:'rgba(0,0,0,.06)'}},
+        x:{ticks:{font:{size:11}},grid:{display:false}}}}});
+  document.getElementById('history-list').innerHTML=`<div style="overflow-x:auto"><table class="result-tbl">
+    <tr><th>날짜</th><th>GPT</th><th>Gemini</th><th>Claude</th><th>질문수</th></tr>
+    ${[...aeoHistory].reverse().map(h=>`<tr><td>${h.date}</td><td class="${h.gpt>0?'mention-y':'mention-n'}">${h.gpt}%</td><td class="${h.gem>0?'mention-y':'mention-n'}">${h.gem}%</td><td class="${h.cld>0?'mention-y':'mention-n'}">${h.cld}%</td><td>${h.n}</td></tr>`).join('')}
+  </table></div>`;
+}
+
+function renderHistory() {
+  if(document.getElementById('tab-trend').classList.contains('active')) renderTrendChart();
+}
+
+function renderQuestions() {
+  document.getElementById('q-count').textContent='('+questions.length+'개)';
+  const el=document.getElementById('q-list');
+  if(!questions.length){el.innerHTML='<div style="color:#aaa;font-size:13px;padding:1rem 0">질문이 없습니다</div>';return;}
+  el.innerHTML=questions.map((q,i)=>`<div class="q-item"><span class="q-num">${i+1}</span><span style="flex:1;font-size:13px">${q}</span><button class="q-del" onclick="deleteQ(${i})">×</button></div>`).join('');
+}
+
+function addQuestion() {
+  const inp=document.getElementById('q-input');
+  const raw=inp.value.trim(); if(!raw) return;
+  raw.split(/\n/).map(l=>l.trim()).filter(Boolean).forEach(l=>{if(!questions.includes(l))questions.push(l);});
+  inp.value=''; renderQuestions();
+}
+function deleteQ(i){questions.splice(i,1);renderQuestions();}
+function addPreset(btn){const q=btn.textContent.trim();if(!questions.includes(q)){questions.push(q);renderQuestions();}}
+
+function updateSchedule() {
+  clearTimeout(schedTimer); schedTimer=null;
+  const on=document.getElementById('sched-on').checked;
+  document.getElementById('next-run-label').textContent='—';
+  if(!on) return;
+  const [hh,mm]=document.getElementById('sched-time').value.split(':').map(Number);
+  function msUntil(){const now=new Date(),t=new Date();t.setHours(hh,mm,0,0);if(t<=now)t.setDate(t.getDate()+1);return t-now;}
+  function schedNext(){
+    const ms=msUntil();
+    document.getElementById('next-run-label').textContent=new Date(Date.now()+ms).toLocaleString('ko-KR');
+    schedTimer=setTimeout(()=>{runAnalysis();setTimeout(schedNext,60000);},ms);
+  }
+  schedNext();
+}
+
+function toggleEmailFields(){
+  document.getElementById('sendgrid-row').style.display=
+    document.getElementById('email-method').value==='sendgrid'?'block':'none';
+}
+
+function buildEmailBody() {
+  if(!results.length) return '결과 없음';
+  return document.getElementById('report-full')?.textContent||'';
+}
+
+function testEmail(){
+  const to=document.getElementById('email-to').value.trim();
+  if(!to){alert('수신 이메일을 입력하세요');return;}
+  doSendEmail('슈어엠 AEO 트래커 - 테스트 이메일','테스트 이메일입니다.\n\n설정이 올바르면 보고서가 자동 발송됩니다.');
+}
+function sendEmailReport(){
+  const to=document.getElementById('email-to').value.trim();
+  if(!to){document.getElementById('email-status').textContent='이메일 주소를 입력하세요';return;}
+  doSendEmail('슈어엠 AEO 일일 보고서 - '+new Date().toLocaleDateString('ko-KR'), buildEmailBody());
+}
+function sendReport(){ sendEmailReport(); }
+
+function doSendEmail(subject, body) {
+  const method=document.getElementById('email-method').value;
+  const to=document.getElementById('email-to').value.trim();
+  const statusEl=document.getElementById('email-status');
+  if(method==='mailto'){
+    window.location.href=`mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    statusEl.textContent='기본 메일 앱이 열립니다.';
+  } else {
+    const sgKey=document.getElementById('key-sendgrid').value.trim();
+    const from=document.getElementById('email-from').value.trim();
+    if(!sgKey||!from){statusEl.textContent='SendGrid 키와 발신 이메일을 입력하세요';return;}
+    statusEl.textContent='발송 중...';
+    fetch('https://api.sendgrid.com/v3/mail/send',{method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+sgKey},
+      body:JSON.stringify({personalizations:[{to:[{email:to}]}],from:{email:from},subject,content:[{type:'text/plain',value:body}]})})
+    .then(r=>{statusEl.textContent=r.ok?'발송 성공!':'발송 실패('+r.status+')';})
+    .catch(e=>{statusEl.textContent='오류: '+e.message;});
+  }
+}
+
+function exportCSV() {
+  if(!results.length){alert('내보낼 결과가 없습니다');return;}
+  const now=new Date().toISOString().slice(0,10);
+  const rows=[['날짜','질문','GPT_언급','GPT_순위','GPT_응답','Gemini_언급','Gemini_순위','Gemini_응답','Claude_언급','Claude_순위','Claude_응답']];
+  results.forEach(r=>{
+    rows.push([now,r.question,
+      r.gpt.mentioned?'Y':'N',r.gpt.rank||'',r.gpt.error?'오류':r.gpt.text.replace(/\n/g,' '),
+      r.gem.mentioned?'Y':'N',r.gem.rank||'',r.gem.error?'오류':r.gem.text.replace(/\n/g,' '),
+      r.cld.mentioned?'Y':'N',r.cld.rank||'',r.cld.error?'오류':r.cld.text.replace(/\n/g,' ')]);
+  });
+  const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='AEO_Report_'+now+'.csv'; a.click();
+}
+
+renderQuestions();
+
+// === AEO END ===
 </script>
 </body>
 </html>
