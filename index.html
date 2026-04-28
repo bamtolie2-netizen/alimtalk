@@ -1478,7 +1478,7 @@ tr:hover .td-act{opacity:1}
     </div>
   </div>
 
-  <input type="file" id="vocFileInput" accept=".csv,.xlsx,.xls" style="display:none">
+  <input type="file" id="vocFileInput" accept=".csv,.xlsx,.xls" style="display:none" onchange="handleUpload(event)">
   <div id="uploadStatus" style="display:none;margin-bottom:16px;" class="card">
     <div id="uploadMsg" style="font-size:13px; color:var(--text2);"></div>
   </div>
@@ -4430,6 +4430,36 @@ function detectColumns(headers) {
     closeDate: find('처리일', '완료일', '종료일', '처리완료일', 'close_date', 'closed'),
   };
 }
+
+// ========= VOC 이벤트 바인딩 =========
+(function() {
+  function bindVocEvents() {
+    const uploadBtn = document.getElementById('uploadBtn')
+    const vocFileInput = document.getElementById('vocFileInput')
+    const errorPopupBtn = document.getElementById('errorPopupBtn')
+    const errorPopup = document.getElementById('errorPopup')
+
+    if (uploadBtn) uploadBtn.addEventListener('click', function() { if(vocFileInput) vocFileInput.click() })
+    if (vocFileInput) vocFileInput.addEventListener('change', handleUpload)
+    if (errorPopupBtn) errorPopupBtn.addEventListener('click', closeErrorPopup)
+    if (errorPopup) errorPopup.addEventListener('click', function(e) { if(e.target === this) closeErrorPopup() })
+
+    // 드래그앤드롭
+    const wrap = document.getElementById('voc-wrap')
+    if (wrap) {
+      wrap.addEventListener('dragenter', function(e) { e.preventDefault(); const ov=document.getElementById('dropOverlay'); if(ov)ov.classList.add('active') })
+      wrap.addEventListener('dragleave', function(e) { if(!wrap.contains(e.relatedTarget)){const ov=document.getElementById('dropOverlay');if(ov)ov.classList.remove('active')} })
+      wrap.addEventListener('dragover', function(e) { e.preventDefault() })
+      wrap.addEventListener('drop', function(e) { e.preventDefault(); const ov=document.getElementById('dropOverlay');if(ov)ov.classList.remove('active'); const f=e.dataTransfer.files[0]; if(f&&vocFileInput){const dt=new DataTransfer();dt.items.add(f);vocFileInput.files=dt.files;handleUpload({target:vocFileInput})} })
+    }
+  }
+  // VOC 탭 진입 시 바인딩 (DOM이 준비된 후)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindVocEvents)
+  } else {
+    bindVocEvents()
+  }
+})();
 
 </script>
 </body>
