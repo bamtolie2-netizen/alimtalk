@@ -5630,7 +5630,8 @@ let tone='formal';
 document.getElementById('cfg-date').value=new Date().toISOString().slice(0,10);
 
 // 저장된 데이터 복원
-(function(){
+
+
   if(typeof __SD__==='undefined'||!__SD__)return;
   try{
     const d=__SD__;
@@ -6532,59 +6533,10 @@ renderGrid('cld');
 
 
 // 탭 진입 시 초기화
-window.hpcInit = hpcInit;
 
 // HPC 전역 노출
-window.goMain = goMain;
-window.goSub = goSub;
-window.dtotal = dtotal;
-window.dBasic = dBasic;
-window.dNew = dNew;
-window.ftotal = ftotal;
-window.newSite = newSite;
-window.addSite = addSite;
-window.delSite = delSite;
-window.setScore = setScore;
-window.hoverStar = hoverStar;
-window.unhoverStar = unhoverStar;
-window.updateStarDisplay = updateStarDisplay;
-window.setCheck = setCheck;
-window.setNote = setNote;
-window.renderGrid = renderGrid;
-window.onDrop = onDrop;
-window.onTxtFile = onTxtFile;
-window.parseTxt = parseTxt;
-window.parseTxtData = parseTxtData;
-window.renderSingle = renderSingle;
-window.renderReport = renderReport;
-window.renderSummaryCards = renderSummaryCards;
-window.renderMergedTable = renderMergedTable;
-window.setTone = setTone;
-window.makeReport = makeReport;
-window.copyKakao = copyKakao;
-window.copyFull = copyFull;
-window.syncApiKey = syncApiKey;
-window.syncApiKeyFromTab = syncApiKeyFromTab;
-window.getApiKey = getApiKey;
-window.addBulkRow = addBulkRow;
-window.delBulkRow = delBulkRow;
-window.runBulkAnalysis = runBulkAnalysis;
-window.analyzeWithClaude = analyzeWithClaude;
-window.saveToHistory = saveToHistory;
-window.renderHistory = renderHistory;
-window.toggleHistBlock = toggleHistBlock;
-window.loadHistoryToCompare = loadHistoryToCompare;
-window.toggleHistSelect = toggleHistSelect;
-window.updateCompareBar = updateCompareBar;
-window.loadSelectedToCompare = loadSelectedToCompare;
-window.clearSelectedHistory = clearSelectedHistory;
-window.deleteHistory = deleteHistory;
-window.clearAllHistory = clearAllHistory;
-window.saveToFile = saveToFile;
-window.exportCsv = exportCsv;
-window.clearAll = clearAll;
 
-})();
+
 // === 홈페이지 비교 END ===
 </script>
 </body>
