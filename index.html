@@ -5563,89 +5563,53 @@ window.selectVocFile = selectVocFile;
 
 
 
+
+
 // === 홈페이지 비교 ===
-(function(){
 
-// 인코딩된 키 (런타임 디코딩)
-const _HPC_K = '';
-
-function hpcInjectKey() {
+// ========= HPC 진입점 =========
+function hpcInit() {
+  // API 키 주입 (설정 탭에서 저장한 키)
   try {
-    // 설정 탭에서 저장한 키 사용
-    const saved = localStorage.getItem('crm_anthropic_key') || localStorage.getItem('hpc_api_key_cld')
-    if (saved) {
-      ;['cfg-api-key','auto-api-key-cld'].forEach(function(id){
-        const el = document.getElementById(id)
-        if (el) el.value = saved
-      })
+    var k = localStorage.getItem('crm_anthropic_key');
+    if (k) {
+      ['cfg-api-key','auto-api-key-gem','auto-api-key-cld'].forEach(function(id){
+        var el = document.getElementById(id); if(el) el.value=k;
+      });
     }
   } catch(e) {}
-}
-
-function hpcInit() {
-  hpcInjectKey();
   hpcRestoreState();
   renderGrid('gem');
   renderGrid('cld');
   renderHistory();
-  // 이벤트 위임 - 한 번만 등록
+  // 이벤트 위임
   var wrap = document.getElementById('hpc-wrap');
   if (wrap && !wrap._hpcBound) {
     wrap._hpcBound = true;
     wrap.addEventListener('click', function(ev) {
       var el = ev.target.closest('[data-hpc-fn]');
-      if (!el) return;
-      var fn = el.dataset.hpcFn;
-      var arg = el.dataset.hpcArg;
-      var func = window[fn];
-      if (typeof func === 'function') {
-        ev.preventDefault();
-        arg !== undefined && arg !== '' ? func(arg) : func();
-      } else {
-        console.warn('HPC function not found:', fn);
+      if (el) {
+        var fn=el.dataset.hpcFn, arg=el.dataset.hpcArg, func=window[fn];
+        if (typeof func==='function') { arg!==undefined&&arg!==''?func(arg):func(); }
       }
+      var tr = ev.target.closest('[data-hpc-trigger]');
+      if (tr) { var t=document.getElementById(tr.dataset.hpcTrigger); if(t) t.click(); }
     });
     wrap.addEventListener('change', function(ev) {
-      var el = ev.target.closest('[data-hpc-fn]');
+      var el=ev.target.closest('[data-hpc-fn]');
       if (!el) return;
-      var fn = el.dataset.hpcFn;
-      var arg = el.dataset.hpcArg;
-      var func = window[fn];
-      if (typeof func === 'function') {
-        arg !== undefined && arg !== '' ? func(arg) : func(ev.target.value);
-      }
+      var fn=el.dataset.hpcFn, arg=el.dataset.hpcArg, func=window[fn];
+      if (typeof func==='function') { arg?func(arg):func(ev.target.value); }
     });
-    wrap.addEventListener('input', function(ev) {
-      var el = ev.target.closest('[data-hpc-fn]');
-      if (!el) return;
-      var fn = el.dataset.hpcFn;
-      var arg = el.dataset.hpcArg;
-      var func = window[fn];
-      if (typeof func === 'function') {
-        arg !== undefined && arg !== '' ? func(arg) : func(ev.target.value);
-      }
     wrap.addEventListener('dragover', function(ev) {
-      var el = ev.target.closest('[data-hpc-drop]');
-      if (el) { ev.preventDefault(); el.classList.add('drag'); }
-    });
-    wrap.addEventListener('dragleave', function(ev) {
-      var el = ev.target.closest('[data-hpc-drop]');
-      if (el) el.classList.remove('drag');
+      if (ev.target.closest('[data-hpc-drop]')) ev.preventDefault();
     });
     wrap.addEventListener('drop', function(ev) {
-      var el = ev.target.closest('[data-hpc-drop]');
+      var el=ev.target.closest('[data-hpc-drop]');
       if (!el) return;
       ev.preventDefault();
-      el.classList.remove('drag');
-      var ai = el.dataset.hpcDrop;
-      if (typeof onDrop === 'function') onDrop(ev, ai);
+      if (typeof onDrop==='function') onDrop(ev, el.dataset.hpcDrop);
     });
-    wrap.addEventListener('click', function(ev2) {
-      var el = ev2.target.closest('[data-hpc-trigger]');
-      if (!el) return;
-      var target = document.getElementById(el.dataset.hpcTrigger);
-      if (target) target.click();
-    }, true);
   }
 }
 
@@ -5686,33 +5650,29 @@ const DB={gem:{sites:[],colorIdx:0},cld:{sites:[],colorIdx:0}};
 let HISTORY=[];
 let selectedHistIds=[];
 let tone='formal';
-// moved to hpcInit: // moved to hpcInit:
 
 function hpcRestoreState() {
-  // cfg-date 초기화
-  var cfgDate = document.getElementById('cfg-date');
-  if (cfgDate && !cfgDate.value) cfgDate.value = new Date().toISOString().slice(0,10);
-  // 저장된 데이터 복원
-  if(typeof __SD__==='undefined'||!__SD__) return;
-  try{
-    const d=__SD__;
-    if(d.gem){DB.gem.sites=d.gem.sites||[];DB.gem.colorIdx=d.gem.colorIdx||0;}
-    if(d.cld){DB.cld.sites=d.cld.sites||[];DB.cld.colorIdx=d.cld.colorIdx||0;}
-    if(d.history){HISTORY=d.history||[];}
-    const s = function(id,v){const el=document.getElementById(id);if(el&&v)el.value=v;};
-    s('cfg-reporter',d.reporter);
-    s('cfg-chairman',d.chairman);
-    s('cfg-company',d.company);
-    if(d.date){const el=document.getElementById('cfg-date');if(el)el.value=d.date;}
-    if(d.savedAt){const el=document.getElementById('save-info');if(el)el.textContent='마지막 저장: '+d.savedAt;}
-    if(d.apiKey){
-      s('cfg-api-key',d.apiKey);
-      s('auto-api-key-gem',d.apiKey);
-      s('auto-api-key-cld',d.apiKey);
+  try {
+    var cfgDate = document.getElementById('cfg-date');
+    if (cfgDate && !cfgDate.value) cfgDate.value = new Date().toISOString().slice(0,10);
+    if (typeof __SD__ === 'undefined' || !__SD__) return;
+    var d = __SD__;
+    if (d.gem) { DB.gem.sites = d.gem.sites||[]; DB.gem.colorIdx = d.gem.colorIdx||0; }
+    if (d.cld) { DB.cld.sites = d.cld.sites||[]; DB.cld.colorIdx = d.cld.colorIdx||0; }
+    if (d.history) HISTORY = d.history||[];
+    function ss(id,v){ var el=document.getElementById(id); if(el&&v) el.value=v; }
+    ss('cfg-reporter', d.reporter);
+    ss('cfg-chairman', d.chairman);
+    ss('cfg-company',  d.company);
+    if (d.date) { var el=document.getElementById('cfg-date'); if(el) el.value=d.date; }
+    if (d.savedAt) { var el=document.getElementById('save-info'); if(el) el.textContent='마지막 저장: '+d.savedAt; }
+    if (d.apiKey) {
+      ss('cfg-api-key', d.apiKey);
+      ss('auto-api-key-gem', d.apiKey);
+      ss('auto-api-key-cld', d.apiKey);
     }
-  }catch(e){console.warn('복원 실패',e);}
+  } catch(e) { console.warn('복원 실패', e); }
 }
-
 
 
 // ══════════════════════════════════════════
@@ -6588,13 +6548,9 @@ function clearAll(){
   document.getElementById('save-info').textContent='저장된 데이터 없음';
 }
 
-// renderGrid는 hpcInit에서 호출
-
-
-// 탭 진입 시 초기화
-
-// HPC 전역 노출
-
+// 초기 렌더
+renderGrid('gem');
+renderGrid('cld');
 
 // === 홈페이지 비교 END ===
 </script>
