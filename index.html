@@ -1805,27 +1805,27 @@ tr:hover .td-act{opacity:1}
   <div class="topbar-r">
     <span class="save-info" id="save-info">저장 없음</span>
     <span class="toast" id="toast-save">✓ 저장됨</span>
-    <button class="btn sm dk" onclick="saveToFile()">💾 저장</button>
-    <button class="btn sm" onclick="exportCsv()">CSV</button>
-    <button class="btn sm og" onclick="goMain('report')">📋 통합 보고</button>
+    <button class="btn sm dk" data-hpc-fn="saveToFile" data-hpc-arg="">💾 저장</button>
+    <button class="btn sm" data-hpc-fn="exportCsv" data-hpc-arg="">CSV</button>
+    <button class="btn sm og" data-hpc-fn="goMain" data-hpc-arg="report">📋 통합 보고</button>
   </div>
 </div>
 
 <!-- 메인 탭 -->
 <div class="main-tabs">
-  <button class="main-tab gem on" onclick="goMain('gem')">
+  <button class="main-tab gem on" data-hpc-fn="goMain" data-hpc-arg="gem">
     <span class="ai-badge gem-badge">Gemini</span> 분석 입력
   </button>
-  <button class="main-tab cld" onclick="goMain('cld')">
+  <button class="main-tab cld" data-hpc-fn="goMain" data-hpc-arg="cld">
     <span class="ai-badge cld-badge">Claude</span> 분석 입력
   </button>
-  <button class="main-tab rep" onclick="goMain('report')">
+  <button class="main-tab rep" data-hpc-fn="goMain" data-hpc-arg="report">
     📊 통합 비교 &amp; 보고
   </button>
-  <button class="main-tab" onclick="goMain('history')" id="main-tab-history">
+  <button class="main-tab" data-hpc-fn="goMain" data-hpc-arg="history" id="main-tab-history">
     <span class="ai-badge" style="background:rgba(124,58,237,.12);color:var(--purple)">이력</span> 분석 이력 관리
   </button>
-  <button class="main-tab" onclick="goMain('settings')" style="margin-left:auto">⚙️ 설정</button>
+  <button class="main-tab" data-hpc-fn="goMain" data-hpc-arg="settings" style="margin-left:auto">⚙️ 설정</button>
 </div>
 <!-- Gemini 페이지 -->
 <div class="mpg on" id="mpg-gem">
@@ -1836,8 +1836,8 @@ tr:hover .td-act{opacity:1}
 
   <!-- 서브 탭 -->
   <div class="sub-tabs" style="margin:-1.5rem -1.5rem 1.5rem;padding:0 1.5rem">
-    <button class="sub-tab on" onclick="goSub('gem','input',this)">업체 등록 &amp; 평가</button>
-    <button class="sub-tab" onclick="goSub('gem','compare',this)">비교표</button>
+    <button class="sub-tab on" data-hpc-fn="goSub" data-hpc-arg="gem','input',this">업체 등록 &amp; 평가</button>
+    <button class="sub-tab" data-hpc-fn="goSub" data-hpc-arg="gem','compare',this">비교표</button>
   </div>
 
   <div class="spg on" id="spg-gem-input">
@@ -1845,14 +1845,12 @@ tr:hover .td-act{opacity:1}
       <div class="ctitle">📄 Gemini 분석 결과 TXT 업로드</div>
       <div class="info-purple">💾 저장 후 저장된 .html 파일을 다시 열면 데이터 유지됩니다</div>
       <div class="upzone gem-zone" id="dropzone-gem"
-        ondragover="event.preventDefault();this.classList.add('drag')"
-        ondragleave="this.classList.remove('drag')"
-        ondrop="onDrop(event,'gem')"
-        onclick="document.getElementById('txt-inp-gem').click()">
+        data-hpc-drop="gem"
+        data-hpc-trigger="txt-inp-gem">
         <div style="font-size:26px;margin-bottom:5px">📄</div>
         <div style="font-size:13px;font-weight:500;color:var(--gem)">Gemini 분석 결과 업로드</div>
         <div style="font-size:11px;color:var(--tx3);margin-top:3px">surem_website_analysis_v2.txt 형식</div>
-        <input type="file" id="txt-inp-gem" accept=".txt" style="display:none" onchange="onTxtFile(this,'gem')"/>
+        <input type="file" id="txt-inp-gem" accept=".txt" style="display:none" data-hpc-fn="onTxtFile" data-hpc-arg="gem" data-hpc-event="change"/>
       </div>
       <div class="status" id="st-gem"></div>
     </div>
@@ -1863,7 +1861,7 @@ tr:hover .td-act{opacity:1}
       </div>
       <div class="krow" style="margin-bottom:10px">
         <label style="font-size:12px">Claude API 키</label>
-        <input type="password" id="auto-api-key-gem" placeholder="sk-ant-..." oninput="syncApiKeyFromTab('gem')" style="padding:6px 9px;border:1px solid var(--bdr);border-radius:7px;font-size:12px;background:var(--sur);color:var(--tx);font-family:var(--fn);font-family:monospace"/>
+        <input type="password" id="auto-api-key-gem" placeholder="sk-ant-..." data-hpc-fn="syncApiKeyFromTab" data-hpc-arg="gem" data-hpc-event="input" style="padding:6px 9px;border:1px solid var(--bdr);border-radius:7px;font-size:12px;background:var(--sur);color:var(--tx);font-family:var(--fn);font-family:monospace"/>
       </div>
       <div style="overflow-x:auto">
         <table class="bulk-list">
@@ -1873,26 +1871,26 @@ tr:hover .td-act{opacity:1}
               <td><input type="text" placeholder="슈어엠" value="슈어엠"/></td>
               <td><input type="text" placeholder="https://surem.co.kr" value="https://www.surem.co.kr"/></td>
               <td><select><option value="me">우리 회사</option><option value="domestic">국내 경쟁사</option><option value="foreign">해외 경쟁사</option></select></td>
-              <td><button class="del-row-btn" onclick="delBulkRow(this)">×</button></td>
+              <td><button class="del-row-btn" data-hpc-fn="delBulkRow" data-hpc-arg="this">×</button></td>
             </tr>
             <tr>
               <td><input type="text" placeholder="인포뱅크" value="인포뱅크"/></td>
               <td><input type="text" placeholder="https://bizgo.io" value="https://bizgo.io"/></td>
               <td><select><option value="me">우리 회사</option><option value="domestic" selected>국내 경쟁사</option><option value="foreign">해외 경쟁사</option></select></td>
-              <td><button class="del-row-btn" onclick="delBulkRow(this)">×</button></td>
+              <td><button class="del-row-btn" data-hpc-fn="delBulkRow" data-hpc-arg="this">×</button></td>
             </tr>
             <tr>
               <td><input type="text" placeholder="Twilio" value="Twilio"/></td>
               <td><input type="text" placeholder="https://twilio.com" value="https://twilio.com"/></td>
               <td><select><option value="me">우리 회사</option><option value="domestic">국내 경쟁사</option><option value="foreign" selected>해외 경쟁사</option></select></td>
-              <td><button class="del-row-btn" onclick="delBulkRow(this)">×</button></td>
+              <td><button class="del-row-btn" data-hpc-fn="delBulkRow" data-hpc-arg="this">×</button></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:8px">
-        <button class="add-row-btn" onclick="addBulkRow('gem')">+ 업체 추가</button>
-        <button class="btn gem-btn" onclick="runBulkAnalysis('gem')" id="bulk-run-gem">🤖 전체 자동 분석 시작</button>
+        <button class="add-row-btn" data-hpc-fn="addBulkRow" data-hpc-arg="gem">+ 업체 추가</button>
+        <button class="btn gem-btn" data-hpc-fn="runBulkAnalysis" data-hpc-arg="gem" id="bulk-run-gem">🤖 전체 자동 분석 시작</button>
       </div>
       <div id="bulk-progress-gem" style="margin-top:10px"></div>
     </div>
@@ -1908,7 +1906,7 @@ tr:hover .td-act{opacity:1}
             <option value="foreign">해외 경쟁사</option>
           </select>
         </div>
-        <button class="btn gem-btn" onclick="addSite('gem')" style="height:36px;align-self:end">+ 추가</button>
+        <button class="btn gem-btn" data-hpc-fn="addSite" data-hpc-arg="gem" style="height:36px;align-self:end">+ 추가</button>
       </div>
       <div class="tip">💡 홈페이지 열어보면서 별점 입력하세요</div>
     </div>
@@ -1923,8 +1921,8 @@ tr:hover .td-act{opacity:1}
       <div style="padding:.875rem 1.25rem;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
         <div class="ctitle" style="margin:0;color:var(--gem)">🔵 Gemini 분석 비교표</div>
         <div style="display:flex;gap:8px">
-          <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-score-gem" checked onchange="renderSingle('gem')" style="accent-color:var(--gem)"/> 점수</label>
-          <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-rank-gem" checked onchange="renderSingle('gem')" style="accent-color:var(--gem)"/> 순위</label>
+          <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-score-gem" checked data-hpc-fn="renderSingle" data-hpc-arg="gem" data-hpc-event="change" style="accent-color:var(--gem)"/> 점수</label>
+          <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-rank-gem" checked data-hpc-fn="renderSingle" data-hpc-arg="gem" data-hpc-event="change" style="accent-color:var(--gem)"/> 순위</label>
         </div>
       </div>
       <div class="twrap" style="border:none;border-radius:0"><div id="cmp-gem"></div></div>
@@ -1939,8 +1937,8 @@ tr:hover .td-act{opacity:1}
   </div>
 
   <div class="sub-tabs" style="margin:-1.5rem -1.5rem 1.5rem;padding:0 1.5rem">
-    <button class="sub-tab on" onclick="goSub('cld','input',this)">업체 등록 &amp; 평가</button>
-    <button class="sub-tab" onclick="goSub('cld','compare',this)">비교표</button>
+    <button class="sub-tab on" data-hpc-fn="goSub" data-hpc-arg="cld','input',this">업체 등록 &amp; 평가</button>
+    <button class="sub-tab" data-hpc-fn="goSub" data-hpc-arg="cld','compare',this">비교표</button>
   </div>
 
   <div class="spg on" id="spg-cld-input">
@@ -1948,14 +1946,12 @@ tr:hover .td-act{opacity:1}
       <div class="ctitle">📄 Claude 분석 결과 TXT 업로드</div>
       <div class="info-purple">💾 저장 후 저장된 .html 파일을 다시 열면 데이터 유지됩니다</div>
       <div class="upzone cld-zone" id="dropzone-cld"
-        ondragover="event.preventDefault();this.classList.add('drag')"
-        ondragleave="this.classList.remove('drag')"
-        ondrop="onDrop(event,'cld')"
-        onclick="document.getElementById('txt-inp-cld').click()">
+        data-hpc-drop="cld"
+        data-hpc-trigger="txt-inp-cld">
         <div style="font-size:26px;margin-bottom:5px">📄</div>
         <div style="font-size:13px;font-weight:500;color:var(--cld)">Claude 분석 결과 업로드</div>
         <div style="font-size:11px;color:var(--tx3);margin-top:3px">surem_website_analysis_v2.txt 형식</div>
-        <input type="file" id="txt-inp-cld" accept=".txt" style="display:none" onchange="onTxtFile(this,'cld')"/>
+        <input type="file" id="txt-inp-cld" accept=".txt" style="display:none" data-hpc-fn="onTxtFile" data-hpc-arg="cld" data-hpc-event="change"/>
       </div>
       <div class="status" id="st-cld"></div>
     </div>
@@ -1966,7 +1962,7 @@ tr:hover .td-act{opacity:1}
       </div>
       <div class="krow" style="margin-bottom:10px">
         <label style="font-size:12px">Claude API 키</label>
-        <input type="password" id="auto-api-key-cld" placeholder="sk-ant-..." oninput="syncApiKeyFromTab('cld')" style="padding:6px 9px;border:1px solid var(--bdr);border-radius:7px;font-size:12px;background:var(--sur);color:var(--tx);font-family:var(--fn);font-family:monospace"/>
+        <input type="password" id="auto-api-key-cld" placeholder="sk-ant-..." data-hpc-fn="syncApiKeyFromTab" data-hpc-arg="cld" data-hpc-event="input" style="padding:6px 9px;border:1px solid var(--bdr);border-radius:7px;font-size:12px;background:var(--sur);color:var(--tx);font-family:var(--fn);font-family:monospace"/>
       </div>
       <div style="overflow-x:auto">
         <table class="bulk-list">
@@ -1976,26 +1972,26 @@ tr:hover .td-act{opacity:1}
               <td><input type="text" placeholder="슈어엠" value="슈어엠"/></td>
               <td><input type="text" placeholder="https://surem.co.kr" value="https://www.surem.co.kr"/></td>
               <td><select><option value="me">우리 회사</option><option value="domestic">국내 경쟁사</option><option value="foreign">해외 경쟁사</option></select></td>
-              <td><button class="del-row-btn" onclick="delBulkRow(this)">×</button></td>
+              <td><button class="del-row-btn" data-hpc-fn="delBulkRow" data-hpc-arg="this">×</button></td>
             </tr>
             <tr>
               <td><input type="text" placeholder="인포뱅크" value="인포뱅크"/></td>
               <td><input type="text" placeholder="https://bizgo.io" value="https://bizgo.io"/></td>
               <td><select><option value="me">우리 회사</option><option value="domestic" selected>국내 경쟁사</option><option value="foreign">해외 경쟁사</option></select></td>
-              <td><button class="del-row-btn" onclick="delBulkRow(this)">×</button></td>
+              <td><button class="del-row-btn" data-hpc-fn="delBulkRow" data-hpc-arg="this">×</button></td>
             </tr>
             <tr>
               <td><input type="text" placeholder="Twilio" value="Twilio"/></td>
               <td><input type="text" placeholder="https://twilio.com" value="https://twilio.com"/></td>
               <td><select><option value="me">우리 회사</option><option value="domestic">국내 경쟁사</option><option value="foreign" selected>해외 경쟁사</option></select></td>
-              <td><button class="del-row-btn" onclick="delBulkRow(this)">×</button></td>
+              <td><button class="del-row-btn" data-hpc-fn="delBulkRow" data-hpc-arg="this">×</button></td>
             </tr>
           </tbody>
         </table>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:8px">
-        <button class="add-row-btn" onclick="addBulkRow('cld')">+ 업체 추가</button>
-        <button class="btn cld-btn" onclick="runBulkAnalysis('cld')" id="bulk-run-cld">🤖 전체 자동 분석 시작</button>
+        <button class="add-row-btn" data-hpc-fn="addBulkRow" data-hpc-arg="cld">+ 업체 추가</button>
+        <button class="btn cld-btn" data-hpc-fn="runBulkAnalysis" data-hpc-arg="cld" id="bulk-run-cld">🤖 전체 자동 분석 시작</button>
       </div>
       <div id="bulk-progress-cld" style="margin-top:10px"></div>
     </div>
@@ -2011,7 +2007,7 @@ tr:hover .td-act{opacity:1}
             <option value="foreign">해외 경쟁사</option>
           </select>
         </div>
-        <button class="btn cld-btn" onclick="addSite('cld')" style="height:36px;align-self:end">+ 추가</button>
+        <button class="btn cld-btn" data-hpc-fn="addSite" data-hpc-arg="cld" style="height:36px;align-self:end">+ 추가</button>
       </div>
       <div class="tip">💡 홈페이지 열어보면서 별점 입력하세요</div>
     </div>
@@ -2026,8 +2022,8 @@ tr:hover .td-act{opacity:1}
       <div style="padding:.875rem 1.25rem;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
         <div class="ctitle" style="margin:0;color:var(--cld)">🟠 Claude 분석 비교표</div>
         <div style="display:flex;gap:8px">
-          <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-score-cld" checked onchange="renderSingle('cld')" style="accent-color:var(--cld)"/> 점수</label>
-          <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-rank-cld" checked onchange="renderSingle('cld')" style="accent-color:var(--cld)"/> 순위</label>
+          <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-score-cld" checked data-hpc-fn="renderSingle" data-hpc-arg="cld" data-hpc-event="change" style="accent-color:var(--cld)"/> 점수</label>
+          <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-rank-cld" checked data-hpc-fn="renderSingle" data-hpc-arg="cld" data-hpc-event="change" style="accent-color:var(--cld)"/> 순위</label>
         </div>
       </div>
       <div class="twrap" style="border:none;border-radius:0"><div id="cmp-cld"></div></div>
@@ -2039,7 +2035,7 @@ tr:hover .td-act{opacity:1}
   <div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem;flex-wrap:wrap">
     <div style="font-size:15px;font-weight:700">📊 통합 비교 &amp; 보고</div>
     <span style="font-size:12px;color:var(--tx2)">Gemini + Claude 분석 결과 종합</span>
-    <button class="btn sm" onclick="renderReport()" style="margin-left:auto">🔄 새로고침</button>
+    <button class="btn sm" data-hpc-fn="renderReport" data-hpc-arg="" style="margin-left:auto">🔄 새로고침</button>
   </div>
 
   <!-- AI별 요약 카드 -->
@@ -2059,8 +2055,8 @@ tr:hover .td-act{opacity:1}
     <div style="padding:.875rem 1.25rem;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
       <div class="ctitle" style="margin:0">Gemini vs Claude 통합 비교표</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-diff" checked onchange="renderReport()" style="accent-color:var(--purple)"/> 점수 차이</label>
-        <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-new-rep" checked onchange="renderReport()" style="accent-color:var(--purple)"/> 신규항목</label>
+        <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-diff" checked data-hpc-fn="renderReport" data-hpc-arg="" data-hpc-event="change" style="accent-color:var(--purple)"/> 점수 차이</label>
+        <label style="font-size:12px;color:var(--tx2);display:flex;align-items:center;gap:4px"><input type="checkbox" id="cb-new-rep" checked data-hpc-fn="renderReport" data-hpc-arg="" data-hpc-event="change" style="accent-color:var(--purple)"/> 신규항목</label>
       </div>
     </div>
     <div class="twrap" style="border:none;border-radius:0"><div id="cmp-merged"></div></div>
@@ -2070,18 +2066,18 @@ tr:hover .td-act{opacity:1}
   <div class="card">
     <div class="ctitle">보고 톤</div>
     <div class="tone-row">
-      <button class="tbtn on" onclick="setTone('formal',this)">정중한 공식 보고</button>
-      <button class="tbtn" onclick="setTone('brief',this)">간결 요약</button>
-      <button class="tbtn" onclick="setTone('competitive',this)">경쟁 우위 강조</button>
-      <button class="tbtn" onclick="setTone('action',this)">개선 액션 중심</button>
+      <button class="tbtn on" data-hpc-fn="setTone" data-hpc-arg="formal',this">정중한 공식 보고</button>
+      <button class="tbtn" data-hpc-fn="setTone" data-hpc-arg="brief',this">간결 요약</button>
+      <button class="tbtn" data-hpc-fn="setTone" data-hpc-arg="competitive',this">경쟁 우위 강조</button>
+      <button class="tbtn" data-hpc-fn="setTone" data-hpc-arg="action',this">개선 액션 중심</button>
     </div>
   </div>
   <div class="card">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
       <div class="ctitle" style="margin:0">카카오톡 / 문자 보고 문구</div>
       <div style="display:flex;gap:6px;align-items:center">
-        <button class="btn sm" onclick="makeReport()">다시 생성</button>
-        <button class="btn sm og" onclick="copyKakao()">복사</button>
+        <button class="btn sm" data-hpc-fn="makeReport" data-hpc-arg="">다시 생성</button>
+        <button class="btn sm og" data-hpc-fn="copyKakao" data-hpc-arg="">복사</button>
         <span class="ctst" id="ct1"></span>
       </div>
     </div>
@@ -2092,7 +2088,7 @@ tr:hover .td-act{opacity:1}
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
       <div class="ctitle" style="margin:0">전문 보고서</div>
       <div style="display:flex;gap:6px;align-items:center">
-        <button class="btn sm" onclick="copyFull()">전문 복사</button>
+        <button class="btn sm" data-hpc-fn="copyFull" data-hpc-arg="">전문 복사</button>
         <span class="ctst" id="ct2"></span>
       </div>
     </div>
@@ -2108,28 +2104,28 @@ tr:hover .td-act{opacity:1}
 
   <!-- 필터 -->
   <div class="hist-filter-row">
-    <input type="text" id="hist-search" placeholder="🔍 업체명 검색..." oninput="renderHistory()" style="width:180px"/>
-    <select id="hist-ai-filter" onchange="renderHistory()">
+    <input type="text" id="hist-search" placeholder="🔍 업체명 검색..." data-hpc-fn="renderHistory" data-hpc-arg="" data-hpc-event="input" style="width:180px"/>
+    <select id="hist-ai-filter" data-hpc-fn="renderHistory" data-hpc-arg="" data-hpc-event="change">
       <option value="all">전체 AI</option>
       <option value="gem">Gemini</option>
       <option value="cld">Claude</option>
     </select>
-    <select id="hist-type-filter" onchange="renderHistory()">
+    <select id="hist-type-filter" data-hpc-fn="renderHistory" data-hpc-arg="" data-hpc-event="change">
       <option value="all">전체 구분</option>
       <option value="me">우리 회사</option>
       <option value="domestic">국내 경쟁사</option>
       <option value="foreign">해외 경쟁사</option>
     </select>
-    <button class="btn sm" onclick="renderHistory()" style="margin-left:auto">🔄 새로고침</button>
-    <button class="btn sm" style="color:var(--red)" onclick="clearAllHistory()">전체 이력 삭제</button>
+    <button class="btn sm" data-hpc-fn="renderHistory" data-hpc-arg="" style="margin-left:auto">🔄 새로고침</button>
+    <button class="btn sm" style="color:var(--red)" data-hpc-fn="clearAllHistory" data-hpc-arg="">전체 이력 삭제</button>
   </div>
 
   <!-- 비교 선택 안내 -->
   <div id="hist-compare-bar" style="display:none;background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.25);border-radius:8px;padding:10px 14px;margin-bottom:1rem;display:none;align-items:center;gap:10px;flex-wrap:wrap">
     <span style="font-size:13px;font-weight:600;color:var(--purple)">비교표에 불러올 이력 선택됨:</span>
     <div id="hist-selected-list" style="display:flex;gap:6px;flex-wrap:wrap;flex:1"></div>
-    <button class="btn sm" style="background:var(--purple);color:#fff;border-color:var(--purple)" onclick="loadSelectedToCompare()">📊 비교표로 불러오기</button>
-    <button class="btn sm" onclick="clearSelectedHistory()">선택 해제</button>
+    <button class="btn sm" style="background:var(--purple);color:#fff;border-color:var(--purple)" data-hpc-fn="loadSelectedToCompare" data-hpc-arg="">📊 비교표로 불러오기</button>
+    <button class="btn sm" data-hpc-fn="clearSelectedHistory" data-hpc-arg="">선택 해제</button>
   </div>
 
   <div id="hist-list"></div>
@@ -2149,14 +2145,14 @@ tr:hover .td-act{opacity:1}
       💾 <b>저장</b>: 상단 저장 버튼 → <code>homepage_compare_saved.html</code> 다운로드<br/>
       📂 <b>복원</b>: 저장된 .html 파일을 브라우저에서 열면 Gemini + Claude 데이터 모두 복원
     </div>
-    <button class="btn" onclick="clearAll()">전체 초기화</button>
+    <button class="btn" data-hpc-fn="clearAll" data-hpc-arg="">전체 초기화</button>
   </div>
   <div class="card">
     <div class="ctitle">자동 분석 API 키 공통 설정</div>
     <div class="info-blue">여기에 입력하면 Gemini·Claude 탭 모두에 자동 적용됩니다</div>
     <div class="krow">
       <label>Claude API 키</label>
-      <input type="password" id="cfg-api-key" placeholder="sk-ant-..." oninput="syncApiKey()" style="font-family:monospace"/>
+      <input type="password" id="cfg-api-key" placeholder="sk-ant-..." data-hpc-fn="syncApiKey" data-hpc-arg="" data-hpc-event="input" style="font-family:monospace"/>
     </div>
     <div class="api-key-hint">💾 저장 버튼을 누르면 API 키도 함께 파일에 저장됩니다. 저장된 파일을 열면 자동 복원.</div>
   </div>
@@ -5588,6 +5584,69 @@ function hpcInjectKey() {
 
 function hpcInit() {
   hpcInjectKey();
+  hpcRestoreState();
+  renderGrid('gem');
+  renderGrid('cld');
+  renderHistory();
+  // 이벤트 위임 - 한 번만 등록
+  var wrap = document.getElementById('hpc-wrap');
+  if (wrap && !wrap._hpcBound) {
+    wrap._hpcBound = true;
+    wrap.addEventListener('click', function(ev) {
+      var el = ev.target.closest('[data-hpc-fn]');
+      if (!el) return;
+      var fn = el.dataset.hpcFn;
+      var arg = el.dataset.hpcArg;
+      var func = window[fn];
+      if (typeof func === 'function') {
+        ev.preventDefault();
+        arg !== undefined && arg !== '' ? func(arg) : func();
+      } else {
+        console.warn('HPC function not found:', fn);
+      }
+    });
+    wrap.addEventListener('change', function(ev) {
+      var el = ev.target.closest('[data-hpc-fn]');
+      if (!el) return;
+      var fn = el.dataset.hpcFn;
+      var arg = el.dataset.hpcArg;
+      var func = window[fn];
+      if (typeof func === 'function') {
+        arg !== undefined && arg !== '' ? func(arg) : func(ev.target.value);
+      }
+    });
+    wrap.addEventListener('input', function(ev) {
+      var el = ev.target.closest('[data-hpc-fn]');
+      if (!el) return;
+      var fn = el.dataset.hpcFn;
+      var arg = el.dataset.hpcArg;
+      var func = window[fn];
+      if (typeof func === 'function') {
+        arg !== undefined && arg !== '' ? func(arg) : func(ev.target.value);
+      }
+    wrap.addEventListener('dragover', function(ev) {
+      var el = ev.target.closest('[data-hpc-drop]');
+      if (el) { ev.preventDefault(); el.classList.add('drag'); }
+    });
+    wrap.addEventListener('dragleave', function(ev) {
+      var el = ev.target.closest('[data-hpc-drop]');
+      if (el) el.classList.remove('drag');
+    });
+    wrap.addEventListener('drop', function(ev) {
+      var el = ev.target.closest('[data-hpc-drop]');
+      if (!el) return;
+      ev.preventDefault();
+      el.classList.remove('drag');
+      var ai = el.dataset.hpcDrop;
+      if (typeof onDrop === 'function') onDrop(ev, ai);
+    });
+    wrap.addEventListener('click', function(ev2) {
+      var el = ev2.target.closest('[data-hpc-trigger]');
+      if (!el) return;
+      var target = document.getElementById(el.dataset.hpcTrigger);
+      if (target) target.click();
+    }, true);
+  }
 }
 
 
@@ -5617,7 +5676,7 @@ const FITEMS=[
 ];
 const DKMAP={'시각 디자인':'visual','시각디자인':'visual','레이아웃':'layout','레이아웃·구조':'layout','레이아웃 · 구조':'layout','모바일':'mobile','모바일 대응':'mobile','로딩':'speed','로딩 속도':'speed','로딩 속도·성능':'speed','로딩 속도 · 성능':'speed','브랜드':'brand','브랜드 일관성':'brand','사용 편의성':'ux','사용편의성':'ux','AI 최적화':'ai_opt','ai 최적화':'ai_opt','몰입도':'engage','전환 편의성':'convert','전환편의성':'convert'};
 const FKMAP={'서비스 소개':'f_service','요금':'f_price','가격':'f_price','API 문서':'f_docs','개발자 가이드':'f_docs','FAQ':'f_faq','고객 사례':'f_case','레퍼런스':'f_case','블로그':'f_blog','뉴스':'f_blog','실시간 채팅':'f_chat','채팅 상담':'f_chat','데모':'f_demo','체험 신청':'f_demo','회원가입':'f_login','로그인':'f_login','사이트 내 검색':'f_search','검색':'f_search','다국어':'f_multi','HTTPS':'f_ssl','보안 인증':'f_ssl','SNS':'f_sns','소개 영상':'f_video','영상':'f_video'};
-const COLORS=['#e8613a','#4285F4','#1a9e6e','#c97f00','#9b59b6','#e74c3c','#2980b9','#16a085','#f39c12','#1abc9c'];
+const HPC_COLORS=['#e8613a','#4285F4','#1a9e6e','#c97f00','#9b59b6','#e74c3c','#2980b9','#16a085','#f39c12','#1abc9c'];
 
 // ══════════════════════════════════════════
 // 상태 — AI별 독립 데이터
@@ -5627,32 +5686,34 @@ const DB={gem:{sites:[],colorIdx:0},cld:{sites:[],colorIdx:0}};
 let HISTORY=[];
 let selectedHistIds=[];
 let tone='formal';
-document.getElementById('cfg-date').value=new Date().toISOString().slice(0,10);
+// moved to hpcInit: // moved to hpcInit:
 
-// 저장된 데이터 복원
-
-
-  if(typeof __SD__==='undefined'||!__SD__)return;
+function hpcRestoreState() {
+  // cfg-date 초기화
+  var cfgDate = document.getElementById('cfg-date');
+  if (cfgDate && !cfgDate.value) cfgDate.value = new Date().toISOString().slice(0,10);
+  // 저장된 데이터 복원
+  if(typeof __SD__==='undefined'||!__SD__) return;
   try{
     const d=__SD__;
     if(d.gem){DB.gem.sites=d.gem.sites||[];DB.gem.colorIdx=d.gem.colorIdx||0;}
     if(d.cld){DB.cld.sites=d.cld.sites||[];DB.cld.colorIdx=d.cld.colorIdx||0;}
     if(d.history){HISTORY=d.history||[];}
-    if(d.reporter)document.getElementById('cfg-reporter').value=d.reporter;
-    if(d.chairman)document.getElementById('cfg-chairman').value=d.chairman;
-    if(d.company)document.getElementById('cfg-company').value=d.company;
-    if(d.date)document.getElementById('cfg-date').value=d.date;
-    if(d.savedAt)document.getElementById('save-info').textContent='마지막 저장: '+d.savedAt;
+    const s = function(id,v){const el=document.getElementById(id);if(el&&v)el.value=v;};
+    s('cfg-reporter',d.reporter);
+    s('cfg-chairman',d.chairman);
+    s('cfg-company',d.company);
+    if(d.date){const el=document.getElementById('cfg-date');if(el)el.value=d.date;}
+    if(d.savedAt){const el=document.getElementById('save-info');if(el)el.textContent='마지막 저장: '+d.savedAt;}
     if(d.apiKey){
-      document.getElementById('cfg-api-key').value=d.apiKey;
-      // 각 탭 자동분석 폼에도 동기화
-      const g=document.getElementById('auto-api-key-gem');
-      const c=document.getElementById('auto-api-key-cld');
-      if(g) g.value=d.apiKey;
-      if(c) c.value=d.apiKey;
+      s('cfg-api-key',d.apiKey);
+      s('auto-api-key-gem',d.apiKey);
+      s('auto-api-key-cld',d.apiKey);
     }
   }catch(e){console.warn('복원 실패',e);}
-})();
+}
+
+
 
 // ══════════════════════════════════════════
 // 탭 네비게이션
@@ -5684,7 +5745,7 @@ function dNew(s){return DCATS.filter(c=>c.isNew).reduce((a,c)=>a+(s.scores[c.k]|
 function ftotal(s){return Object.values(s.checks).filter(Boolean).length;}
 function newSite(name,url,type,ai){
   const db=DB[ai];
-  const s={id:Date.now()+Math.random(),name,url,type,color:COLORS[db.colorIdx++%COLORS.length],scores:{},checks:{},note:''};
+  const s={id:Date.now()+Math.random(),name,url,type,color:HPC_COLORS[db.colorIdx++%HPC_COLORS.length],scores:{},checks:{},note:''};
   DCATS.forEach(c=>s.scores[c.k]=0);FITEMS.forEach(f=>s.checks[f.k]=false);return s;
 }
 
@@ -5815,7 +5876,7 @@ function parseTxt(file,ai){
       parsed.forEach(p=>{
         const exist=DB[ai].sites.find(s=>s.name===p.name);
         if(exist){exist.url=p.url;exist.type=p.type;exist.scores=p.scores;exist.checks=p.checks;exist.note=p.note;updated++;}
-        else{p.id=Date.now()+Math.random();p.color=COLORS[DB[ai].colorIdx++%COLORS.length];DB[ai].sites.push(p);added++;}
+        else{p.id=Date.now()+Math.random();p.color=HPC_COLORS[DB[ai].colorIdx++%HPC_COLORS.length];DB[ai].sites.push(p);added++;}
         // 이력 저장
         const _ts=Object.values(p.scores||{}).reduce((a,b)=>a+(b||0),0);
         HISTORY.push({id:Date.now()+Math.random(),ai,date:new Date().toLocaleDateString('ko-KR'),dateISO:new Date().toISOString(),name:p.name,url:p.url||'',type:p.type||'domestic',scores:{...(p.scores||{})},checks:{...(p.checks||{})},note:p.note||'',totalScore:_ts});
@@ -6527,9 +6588,7 @@ function clearAll(){
   document.getElementById('save-info').textContent='저장된 데이터 없음';
 }
 
-// 초기 렌더
-renderGrid('gem');
-renderGrid('cld');
+// renderGrid는 hpcInit에서 호출
 
 
 // 탭 진입 시 초기화
